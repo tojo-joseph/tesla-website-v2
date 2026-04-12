@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the Car type (you may want to move this to a types file)
 export interface Car {
@@ -11,9 +11,30 @@ export interface Car {
   topSpeed: number;
   zeroToSixty: number;
   range: number;
-  createdAt: string;
+  createdAt: Date | string;
   variants: Variant[];
+  colors: Color[];
   images: CarImage[];
+  buildConfigs: BuildConfig[];
+}
+
+export interface Color {
+  id: string;
+  carId: string;
+  name: string;
+  hexCode: string;
+  imageUrl: string;
+}
+
+export interface BuildConfig {
+  id: string;
+  carId: string;
+  variantId: string;
+  colorId: string;
+  totalPrice: number;
+  createdAt: Date | string;
+  variant?: Variant;
+  color?: Color;
 }
 
 export interface Variant {
@@ -51,7 +72,7 @@ const initialState: CarState = {
 
 // Async thunk for fetching cars
 export const fetchCars = createAsyncThunk(
-  'cars/fetchCars',
+  "cars/fetchCars",
   async (params: {
     search?: string;
     minPrice?: number;
@@ -60,26 +81,28 @@ export const fetchCars = createAsyncThunk(
     limit?: number;
   }) => {
     const searchParams = new URLSearchParams();
-    
-    if (params.search) searchParams.set('search', params.search);
-    if (params.minPrice !== undefined) searchParams.set('minPrice', params.minPrice.toString());
-    if (params.maxPrice !== undefined) searchParams.set('maxPrice', params.maxPrice.toString());
-    if (params.page) searchParams.set('page', params.page.toString());
-    if (params.limit) searchParams.set('limit', params.limit.toString());
+
+    if (params.search) searchParams.set("search", params.search);
+    if (params.minPrice !== undefined)
+      searchParams.set("minPrice", params.minPrice.toString());
+    if (params.maxPrice !== undefined)
+      searchParams.set("maxPrice", params.maxPrice.toString());
+    if (params.page) searchParams.set("page", params.page.toString());
+    if (params.limit) searchParams.set("limit", params.limit.toString());
 
     const response = await fetch(`/api/cars?${searchParams.toString()}`);
-    
+
     if (!response.ok) {
-      throw new Error('Failed to fetch cars');
+      throw new Error("Failed to fetch cars");
     }
-    
+
     const data = await response.json();
     return data;
-  }
+  },
 );
 
 const carSlice = createSlice({
-  name: 'cars',
+  name: "cars",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -92,21 +115,27 @@ const carSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCars.fulfilled, (state, action: PayloadAction<{
-        data: Car[];
-        total: number;
-        page: number;
-        totalPages: number;
-      }>) => {
-        state.loading = false;
-        state.cars = action.payload.data;
-        state.total = action.payload.total;
-        state.totalPages = action.payload.totalPages;
-        state.error = null;
-      })
+      .addCase(
+        fetchCars.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            data: Car[];
+            total: number;
+            page: number;
+            totalPages: number;
+          }>,
+        ) => {
+          state.loading = false;
+          state.cars = action.payload.data;
+          state.total = action.payload.total;
+          state.totalPages = action.payload.totalPages;
+          state.error = null;
+        },
+      )
       .addCase(fetchCars.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to fetch cars';
+        state.error = action.error.message || "Failed to fetch cars";
       });
   },
 });

@@ -10,11 +10,14 @@ export async function generateMetadata({
   params,
 }: CarDetailPageProps): Promise<Metadata> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/cars?slug=${params.slug}`,
-    );
-    const cars = await response.json();
-    const car = cars.data?.[0];
+    const { prisma } = await import("@/lib/prisma");
+    const car = await prisma.car.findUnique({
+      where: { slug: params.slug },
+      select: {
+        name: true,
+        tagline: true,
+      },
+    });
 
     if (!car) {
       return {
@@ -38,24 +41,46 @@ export async function generateMetadata({
   }
 }
 
-// Force dynamic rendering for this page
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    const cars = await prisma.car.findMany({
+      select: { slug: true },
+    });
+
+    return cars.map((car: { slug: string }) => ({
+      slug: car.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params:", error);
+    return [];
+  }
+}
 
 async function getCarData(slug: string) {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/cars?slug=${slug}`,
-      {
-        next: { revalidate: 60 }, // ISR with 60 second revalidation
+    const { prisma } = await import("@/lib/prisma");
+    const car = await prisma.car.findUnique({
+      where: { slug },
+      include: {
+        variants: {
+          orderBy: { price: "asc" },
+        },
+        colors: {
+          orderBy: { name: "asc" },
+        },
+        images: true,
+        buildConfigs: {
+          include: {
+            variant: true,
+            color: true,
+          },
+          orderBy: { createdAt: "desc" },
+        },
       },
-    );
+    });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch car data");
-    }
-
-    const data = await response.json();
-    return data.data?.[0] || null;
+    return car;
   } catch (error) {
     console.error("Failed to fetch car data:", error);
     return null;

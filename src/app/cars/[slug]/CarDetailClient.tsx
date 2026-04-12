@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "@/store";
 import { setColor, setVariant } from "@/store/configSlice";
-import { Car } from "@/store/carSlice";
-import Image from "next/image";
+import { Car, Color, Variant } from "@/store/carSlice";
 import Link from "next/link";
 
 interface CarDetailClientProps {
@@ -18,7 +18,7 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
   );
 
   // Extract colors from car images (assuming each color has an image)
-  const colors = car.images.map((img, index) => ({
+  const colors = car.images.map((img: any, index: number) => ({
     id: img.id,
     name: img.alt || `Color ${index + 1}`,
     hexCode: img.alt?.includes("Red")
@@ -170,7 +170,7 @@ function ColorSelector({
     id: string;
     name: string;
     hexCode: string;
-    imageUrl: string;
+    imageUrl?: string;
   }>;
   selectedColorId?: string;
 }) {
