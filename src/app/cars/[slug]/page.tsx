@@ -1,119 +1,73 @@
 import { Metadata } from "next";
 import Navigation from "@/components/Navigation";
 import CarDetailClient from "./CarDetailClient";
+import { getCarBySlug, getAllCars } from "@/lib/data/cars";
+import { notFound } from "next/navigation";
 
-interface CarDetailPageProps {
-  params: { slug: string };
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 export async function generateMetadata({
   params,
-}: CarDetailPageProps): Promise<Metadata> {
-  try {
-    const { prisma } = await import("@/lib/prisma");
-    const car = await prisma.car.findUnique({
-      where: { slug: params.slug },
-      select: {
-        name: true,
-        tagline: true,
-      },
-    });
+}: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const car = await getCarBySlug(resolvedParams.slug);
 
-    if (!car) {
-      return {
-        title: "Car Not Found - Tesla",
-        description: "The requested car could not be found.",
-      };
-    }
-
+  if (!car) {
     return {
-      title: `${car.name} - Tesla`,
-      description:
-        car.tagline ||
-        `Explore the ${car.name} with detailed specifications and pricing.`,
-    };
-  } catch (error) {
-    return {
-      title: "Tesla Vehicle",
-      description:
-        "Explore Tesla vehicles with detailed specifications and pricing.",
+      title: "Car Not Found - Tesla",
+      description: "The requested car could not be found.",
     };
   }
+
+  return {
+    title: `${car.name} - Tesla`,
+    description:
+      car.tagline ||
+      `Explore the ${car.name} with detailed specifications and pricing.`,
+    keywords: [
+      car.name,
+      "Tesla",
+      "electric vehicle",
+      "EV",
+      "sustainable transport",
+      ...car.variants.map((v) => v.name),
+    ],
+    openGraph: {
+      title: car.name,
+      description: car.tagline || `Explore the ${car.name}`,
+      images: car.images[0] ? [car.images[0].url] : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: car.name,
+      description: car.tagline || `Explore the ${car.name}`,
+      images: car.images[0] ? [car.images[0].url] : [],
+    },
+    alternates: {
+      canonical: `https://tesla.com/cars/${resolvedParams.slug}`,
+    },
+  };
 }
 
 export async function generateStaticParams() {
-  try {
-    const { prisma } = await import("@/lib/prisma");
-    const cars = await prisma.car.findMany({
-      select: { slug: true },
-    });
+  const cars = await getAllCars();
 
-    return cars.map((car: { slug: string }) => ({
-      slug: car.slug,
-    }));
-  } catch (error) {
-    console.error("Failed to generate static params:", error);
-    return [];
-  }
+  return cars.map((car: { slug: string }) => ({
+    slug: car.slug,
+  }));
 }
 
-async function getCarData(slug: string) {
-  try {
-    const { prisma } = await import("@/lib/prisma");
-    const car = await prisma.car.findUnique({
-      where: { slug },
-      include: {
-        variants: {
-          orderBy: { price: "asc" },
-        },
-        colors: {
-          orderBy: { name: "asc" },
-        },
-        images: true,
-        buildConfigs: {
-          include: {
-            variant: true,
-            color: true,
-          },
-          orderBy: { createdAt: "desc" },
-        },
-      },
-    });
-
-    return car;
-  } catch (error) {
-    console.error("Failed to fetch car data:", error);
-    return null;
-  }
-}
-
-export default async function CarDetailPage({ params }: CarDetailPageProps) {
-  const car = await getCarData(params.slug);
+export default async function CarDetailPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const car = await getCarBySlug(resolvedParams.slug);
 
   if (!car) {
-    return (
-      <div className="min-h-screen bg-midlife-bg">
-        <Navigation />
-        <main className="pt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold text-midlife-text mb-4 font-termina">
-                Car Not Found
-              </h1>
-              <p className="text-midlife-light-gray mb-8 font-satoshi">
-                The requested vehicle could not be found.
-              </p>
-              <a
-                href="/cars"
-                className="inline-block bg-midlife-red hover:bg-red-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina"
-              >
-                Back to Vehicles
-              </a>
-            </div>
-          </div>
-        </main>
-      </div>
-    );
+    notFound();
   }
 
   return (
