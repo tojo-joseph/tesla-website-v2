@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://teslauser:teslapass@db:5432/tesladb
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - tesla-network
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=teslauser
+      - POSTGRES_PASSWORD=teslapass
+      - POSTGRES_DB=tesladb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U teslauser -d tesladb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - tesla-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  tesla-network:
+    driver: bridge

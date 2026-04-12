@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "prisma": "prisma",
-    "db:seed": "ts-node prisma/seed.ts"
+    "db:seed": "ts-node prisma/seed.ts",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
