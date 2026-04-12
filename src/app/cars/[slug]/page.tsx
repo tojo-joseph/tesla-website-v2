@@ -38,23 +38,8 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/cars`,
-    );
-    const data = await response.json();
-
-    return (
-      data.data?.map((car: { slug: string }) => ({
-        slug: car.slug,
-      })) || []
-    );
-  } catch (error) {
-    console.error("Failed to generate static params:", error);
-    return [];
-  }
-}
+// Force dynamic rendering for this page
+export const dynamic = "force-dynamic";
 
 async function getCarData(slug: string) {
   try {
