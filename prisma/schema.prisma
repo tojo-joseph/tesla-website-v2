@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Car {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  tagline     String
+  basePrice   Float
+  description String
+  topSpeed    Int
+  zeroToSixty Float
+  range       Int
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  variants    Variant[]
+  colors      Color[]
+  images      CarImage[]
+  buildConfigs BuildConfig[]
+}
+
+model Variant {
+  id         String  @id @default(cuid())
+  carId      String
+  name       String
+  price      Float
+  horsepower Int
+  torque     Int
+  
+  // Relations
+  car        Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  buildConfigs BuildConfig[]
+}
+
+model Color {
+  id       String @id @default(cuid())
+  carId    String
+  name     String
+  hexCode  String
+  imageUrl String
+  
+  // Relations
+  car      Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  buildConfigs BuildConfig[]
+}
+
+model CarImage {
+  id        String  @id @default(cuid())
+  carId     String
+  url       String
+  alt       String
+  isPrimary Boolean @default(false)
+  
+  // Relations
+  car       Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model BuildConfig {
+  id         String   @id @default(cuid())
+  carId      String
+  variantId  String
+  colorId    String
+  totalPrice Float
+  createdAt  DateTime @default(now())
+  
+  // Relations
+  car        Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  variant    Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  color      Color   @relation(fields: [colorId], references: [id], onDelete: Cascade)
+}
