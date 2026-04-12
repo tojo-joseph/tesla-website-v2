@@ -18,8 +18,8 @@ COPY . .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Build the application
-RUN npm run build
+# Generate Prisma Client and build the application
+RUN npx prisma generate && npm run build
 
 # Stage 3: Production runner
 FROM node:18-alpine AS runner
