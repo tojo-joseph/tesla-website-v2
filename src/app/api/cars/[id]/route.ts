@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../../lib/prisma";
+import { prisma } from "@/lib/prisma";
+
+// Force dynamic rendering for this API route
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(
   request: NextRequest,
@@ -8,11 +12,19 @@ export async function GET(
   try {
     const { id: slug } = await params;
 
+    if (!slug) {
+      return NextResponse.json({ error: "Invalid car ID" }, { status: 400 });
+    }
+
     const car = await prisma.car.findUnique({
       where: { slug },
       include: {
-        variants: true,
-        colors: true,
+        variants: {
+          orderBy: { price: "asc" },
+        },
+        colors: {
+          orderBy: { name: "asc" },
+        },
         images: true,
         buildConfigs: {
           include: {
@@ -31,6 +43,21 @@ export async function GET(
     return NextResponse.json(car);
   } catch (error) {
     console.error("Failed to fetch car:", error);
-    return NextResponse.json({ error: "Failed to fetch car" }, { status: 500 });
+
+    // Don't expose internal errors in production
+    if (process.env.NODE_ENV === "production") {
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json(
+      {
+        error: "Failed to fetch car",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
   }
 }
