@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/store";
 import { fetchCars } from "@/store/carSlice";
+import { RootState } from "@/store";
 import FilterPanel from "@/components/cars/FilterPanel";
 import CarCard from "@/components/cars/CarCard";
 import Pagination from "@/components/cars/Pagination";
@@ -11,10 +12,10 @@ import Navigation from "@/components/Navigation";
 export default function CarsPage() {
   const dispatch = useAppDispatch();
   const { cars, loading, total, totalPages } = useAppSelector(
-    (state) => state.cars,
+    (state: RootState) => state.cars,
   );
   const { search, minPrice, maxPrice, page } = useAppSelector(
-    (state) => state.filters,
+    (state: RootState) => state.filters,
   );
 
   // Fetch cars on mount and when filters/page change
