@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import MissionSection from "@/components/sections/MissionSection";
 import ProductSection from "@/components/sections/ProductSection";
 import FinalSection from "@/components/sections/FinalSection";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   return (
@@ -12,8 +13,8 @@ export default function Home() {
         <MissionSection />
         <ProductSection />
         <FinalSection />
-        {/* Add sections for navbar links */}
       </main>
+      <Footer />
     </div>
   );
 }

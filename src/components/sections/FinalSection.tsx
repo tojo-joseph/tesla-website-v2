@@ -21,93 +21,121 @@ export default function FinalSection() {
   return (
     <motion.section
       ref={finalRef}
-      className="min-h-screen flex items-center justify-center px-8 py-32"
+      className="min-h-screen bg-midlife-bg px-4 sm:px-8 lg:px-16 py-20 lg:py-16 flex items-center"
       style={{ opacity: finalOpacity, y: finalY }}
     >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="relative">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Red Tesla image */}
-            <motion.div
-              initial={{ opacity: 0, x: -80, rotate: -3 }}
-              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <div className="absolute -inset-6 bg-gradient-to-br from-accent/30 via-transparent to-transparent blur-2xl opacity-50"></div>
-                <motion.img
-                  src="https://images.unsplash.com/photo-1767949374128-58d3592a273d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
-                  alt="Red Tesla Model 3"
-                  className="w-full h-auto relative z-10 drop-shadow-2xl"
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.5 }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left Column - Profile & Message */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-midlife-red text-sm tracking-wider mb-6 font-satoshi">
+              {"{ Get in touch }"}
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-midlife-text mb-12 font-termina uppercase leading-tight">
+              LET'S START YOUR
+              <br />
+              ELECTRIC JOURNEY TODAY
+            </h2>
+
+            {/* Profile Card */}
+            <div className="flex items-start gap-4 mb-8">
+              <div className="w-16 h-16 rounded-full bg-midlife-dark-gray overflow-hidden shrink-0">
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+                  alt="Tesla Representative"
+                  className="w-full h-full object-cover"
                 />
               </div>
-            </motion.div>
-
-            {/* Text content */}
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-xs tracking-widest opacity-60 uppercase mb-8">
-                // Philosophy //
+              <div>
+                <h3 className="text-xl font-bold text-midlife-text font-termina">
+                  Tesla Team
+                </h3>
+                <p className="text-sm text-midlife-light-gray font-satoshi">
+                  Customer Experience Specialist
+                </p>
               </div>
-              <h2 className="text-5xl md:text-7xl leading-[1.1] tracking-tight lowercase">
-                built on
-                <br />
-                purposefulness
-              </h2>
-              <p className="mt-8 text-lg opacity-70 leading-relaxed max-w-lg">
-                Every design decision, every engineering choice, rooted in a
-                singular vision of sustainable transportation.
-              </p>
-            </motion.div>
-          </div>
+            </div>
 
-          {/* Social links */}
+            <p className="text-midlife-light-gray leading-relaxed font-satoshi">
+              At Tesla, we believe in accelerating the world's transition to
+              sustainable energy. If you have questions or need guidance about
+              our vehicles, energy products, or services, we're here to support
+              you. Your journey to sustainable transportation starts here —
+              let's create something incredible together.
+            </p>
+          </motion.div>
+
+          {/* Right Column - Contact Form */}
           <motion.div
-            className="flex gap-6 justify-center mt-32 text-sm"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <motion.a
-              href="#"
-              className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center hover:border-accent hover:text-accent transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              &#120146;
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center hover:border-accent hover:text-accent transition-all"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              &#8508;
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center hover:border-accent hover:text-accent transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              &#8424;
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center hover:border-accent hover:text-accent transition-all"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              &#8477;
-            </motion.a>
+            <form className="space-y-6">
+              {/* Name and Email */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-midlife-light-gray mb-2 font-satoshi">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="John Smith"
+                    className="w-full px-4 py-3 bg-midlife-dark-gray text-midlife-text rounded-lg border border-midlife-dark-gray focus:border-midlife-red outline-none transition-colors font-satoshi"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-midlife-light-gray mb-2 font-satoshi">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="johnsmith@gmail.com"
+                    className="w-full px-4 py-3 bg-midlife-dark-gray text-midlife-text rounded-lg border border-midlife-dark-gray focus:border-midlife-red outline-none transition-colors font-satoshi"
+                  />
+                </div>
+              </div>
+
+              {/* Service Needed */}
+              <div>
+                <label className="block text-sm text-midlife-light-gray mb-2 font-satoshi">
+                  Service Needed ?
+                </label>
+                <select className="w-full px-4 py-3 bg-midlife-dark-gray text-midlife-text rounded-lg border border-midlife-dark-gray focus:border-midlife-red outline-none transition-colors font-satoshi appearance-none cursor-pointer">
+                  <option>Vehicle Purchase Inquiry</option>
+                  <option>Test Drive Booking</option>
+                  <option>Energy Products</option>
+                  <option>Service & Support</option>
+                  <option>General Inquiry</option>
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm text-midlife-light-gray mb-2 font-satoshi">
+                  What Can I Help You...
+                </label>
+                <textarea
+                  rows={6}
+                  placeholder="Hello, I'd like to enquire about..."
+                  className="w-full px-4 py-3 bg-midlife-dark-gray text-midlife-text rounded-lg border border-midlife-dark-gray focus:border-midlife-red outline-none transition-colors resize-none font-satoshi"
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full py-4 bg-midlife-red text-white rounded-lg font-bold text-lg hover:bg-midlife-red/90 transition-colors font-satoshi"
+              >
+                Submit
+              </button>
+            </form>
           </motion.div>
         </div>
       </div>

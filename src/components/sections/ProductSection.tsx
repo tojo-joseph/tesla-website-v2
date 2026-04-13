@@ -25,35 +25,51 @@ export default function ProductSection() {
   return (
     <motion.section
       ref={productRef}
-      className="min-h-screen flex items-center justify-center px-8 py-32 relative overflow-hidden"
+      className="min-h-screen bg-midlife-bg px-4 sm:px-8 lg:px-16 py-20 lg:py-16"
       style={{ opacity: productOpacity, y: productY }}
     >
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="relative">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            {/* Left content */}
-            <div>
-              <div className="text-xs tracking-widest opacity-60 uppercase mb-8">
-                // Engineering //
-              </div>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-16">
+          <motion.div
+            className="text-midlife-red text-sm tracking-wider mb-4 font-satoshi"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            [ Engineering ]
+          </motion.div>
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-midlife-text font-termina uppercase leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            GROUNDED IN SCIENCE
+            <br />
+            BAKED IN STYLE
+          </motion.h2>
+        </div>
 
-              <h2 className="text-5xl md:text-6xl leading-[1.1] tracking-tight lowercase mb-12">
-                grounded in science
-                <span className="inline-flex items-center mx-3 align-middle">
-                  <motion.div
-                    className="relative w-16 h-16 flex items-center justify-center"
-                    whileHover={{ rotate: 180 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <div
-                      className="absolute inset-0 bg-accent/10 backdrop-blur-sm"
-                      style={{
-                        clipPath:
-                          "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
-                      }}
-                    ></div>
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left Column - Content Cards */}
+          <div className="space-y-8">
+            {/* How it Works Card */}
+            <motion.div
+              className="bg-midlife-dark-gray rounded-2xl p-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-midlife-red/10 flex items-center justify-center">
                     <svg
-                      className="w-8 h-8 text-accent relative z-10"
+                      className="w-6 h-6 text-midlife-red"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -61,68 +77,120 @@ export default function ProductSection() {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={1.5}
+                        strokeWidth={2}
                         d="M13 10V3L4 14h7v7l9-11h-7z"
                       />
                     </svg>
-                  </motion.div>
-                </span>
-                baked in style
-              </h2>
-
-              {/* Description */}
-              <div className="space-y-8 text-sm">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <h3 className="mb-3 opacity-60 uppercase tracking-wide text-xs">
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-midlife-text mb-3 font-termina">
                     How it works
                   </h3>
-                  <p className="leading-relaxed">
+                  <p className="text-midlife-light-gray leading-relaxed font-satoshi">
                     Electric motors with zero emissions, acceleration unlike
                     anything else on the road. Instant torque, seamless power
                     delivery.
                   </p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  <h3 className="mb-3 opacity-60 uppercase tracking-wide text-xs">
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Portfolio Card */}
+            <motion.div
+              className="bg-midlife-dark-gray rounded-2xl p-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-midlife-red/10 flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-midlife-red"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-midlife-text mb-3 font-termina">
                     Portfolio
                   </h3>
-                  <p className="leading-relaxed">
+                  <p className="text-midlife-light-gray leading-relaxed font-satoshi">
                     A fleet forged around foundational engineering principles.
                     The Model S, Model 3, Model X, Model Y, Cybertruck, and
                     beyond.
                   </p>
-                </motion.div>
+                </div>
               </div>
-            </div>
+            </motion.div>
+          </div>
 
-            {/* Cybertruck image */}
-            <div className="relative mt-8 md:mt-0">
-              <div className="relative">
-                <div className="absolute -inset-8 bg-gradient-to-tl from-accent/20 via-transparent to-transparent blur-3xl opacity-40"></div>
-                <motion.img
-                  src="https://images.unsplash.com/photo-1716304960614-67625112f271?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
-                  alt="Tesla Cybertruck"
-                  className="w-full h-auto relative z-10 drop-shadow-2xl"
-                  initial={{ opacity: 0, x: 100, rotate: 3 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, rotate: -2 }}
-                />
-              </div>
+          {/* Right Column - Cybertruck Image */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="relative rounded-2xl overflow-hidden border-4 border-midlife-red/20">
+              <motion.img
+                src="https://images.unsplash.com/photo-1716304960614-67625112f271?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200"
+                alt="Tesla Cybertruck"
+                className="w-full h-auto object-cover"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6 }}
+              />
+            </div>
+            {/* Decorative Element */}
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-midlife-red/10 rounded-full blur-3xl -z-10"></div>
+          </motion.div>
+        </div>
+
+        {/* Features Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="bg-midlife-dark-gray rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-midlife-red mb-2 font-termina">
+              0-60
+            </div>
+            <div className="text-midlife-light-gray text-sm font-satoshi">
+              In under 2 seconds
             </div>
           </div>
-        </div>
+          <div className="bg-midlife-dark-gray rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-midlife-red mb-2 font-termina">
+              400+
+            </div>
+            <div className="text-midlife-light-gray text-sm font-satoshi">
+              Miles of range
+            </div>
+          </div>
+          <div className="bg-midlife-dark-gray rounded-xl p-6 text-center">
+            <div className="text-3xl font-bold text-midlife-red mb-2 font-termina">
+              1,020
+            </div>
+            <div className="text-midlife-light-gray text-sm font-satoshi">
+              Peak horsepower
+            </div>
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   );

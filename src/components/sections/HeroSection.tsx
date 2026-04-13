@@ -113,7 +113,10 @@ export default function HeroSection() {
               playsInline
               className="w-full h-full object-cover"
             >
-              <source src="/videos/tesla_v2_hero.mp4" type="video/mp4" />
+              <source
+                src="https://res.cloudinary.com/tojo-joseph/video/upload/v1776070240/tesla_v2_hero_ljypfd.mp4"
+                type="video/mp4"
+              />
             </video>
 
             {/* Floating Badge */}
@@ -239,7 +242,10 @@ export default function HeroSection() {
                 playsInline
                 className="w-full h-full object-cover"
               >
-                <source src="/videos/tesla_v2_hero.mp4" type="video/mp4" />
+                <source
+                  src="https://res.cloudinary.com/tojo-joseph/video/upload/v1776070240/tesla_v2_hero_ljypfd.mp4"
+                  type="video/mp4"
+                />
               </video>
 
               {/* Floating Badge */}
