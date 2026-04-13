@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client"],
+  },
   images: {
     remotePatterns: [
       {
@@ -9,7 +11,7 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
-  }
+  },
 };
 
 export default nextConfig;
