@@ -2,97 +2,273 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import Link from "next/link";
 
 export default function HeroSection() {
   const heroRef = useRef(null);
 
-  const { scrollYProgress: heroScroll } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
 
-  const heroOpacity = useTransform(heroScroll, [0, 0.5], [1, 0]);
-  const heroY = useTransform(heroScroll, [0, 1], [0, -100]);
-  const heroScale = useTransform(heroScroll, [0, 0.5], [1, 0.95]);
+  // Content fade out as we scroll
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const contentX = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
+
+  // Video expansion - starts at 50% width, expands to 100%
+  const videoWidth = useTransform(scrollYProgress, [0.2, 0.6], ["50%", "100%"]);
+  const videoHeight = useTransform(
+    scrollYProgress,
+    [0.2, 0.6],
+    ["70vh", "100vh"],
+  );
+  const videoBorderRadius = useTransform(scrollYProgress, [0.2, 0.6], [24, 0]);
+  const videoPadding = useTransform(scrollYProgress, [0.2, 0.6], [64, 0]);
+
+  // Badge fade out during expansion
+  const badgeOpacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0]);
 
   return (
-    <motion.section
-      ref={heroRef}
-      className="relative h-screen overflow-hidden"
-      style={{ opacity: heroOpacity }}
-    >
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/videos/tesla_v2_hero.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50"></div>
-      </div>
-
-      {/* Left-aligned Text Overlay */}
-      <motion.div
-        className="relative z-10 h-full flex items-center justify-start"
-        style={{ y: heroY, scale: heroScale }}
-      >
-        <div className="w-full max-w-4xl mx-auto px-8 lg:px-16">
-          {/* Tesla Typography */}
-          <div className="text-left">
+    <section ref={heroRef} className="relative bg-midlife-bg lg:h-[200vh]">
+      {/* Mobile Layout - Simple Vertical Stack */}
+      <div className="lg:hidden min-h-screen flex flex-col">
+        {/* Content Section - Mobile */}
+        <div className="w-full flex items-center justify-center px-8 py-20 pt-24">
+          <div className="max-w-2xl">
+            {/* Eyebrow Text */}
             <motion.div
-              className="mb-4 text-xs tracking-widest opacity-60 uppercase"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              transition={{ duration: 0.8 }}
+              className="flex items-center gap-2 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              // Electric Vehicles //
+              <span className="text-midlife-red text-2xl">✱</span>
+              <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi">
+                We are electric vehicle
+              </span>
             </motion.div>
 
+            {/* Main Heading */}
             <motion.h1
-              className="text-8xl md:text-9xl leading-[0.9] tracking-tight lowercase select-none text-midlife-text"
+              className="text-5xl sm:text-6xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Tesla
+              LEADERS
             </motion.h1>
 
+            {/* Subheading */}
             <motion.p
-              className="mt-8 text-2xl md:text-3xl max-w-2xl leading-relaxed text-midlife-light-gray"
+              className="text-base sm:text-lg text-midlife-light-gray mb-8 leading-relaxed font-satoshi"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              Accelerating the world's transition to{" "}
-              <span className="text-accent">sustainable energy</span> through
-              innovation and <span className="text-accent">performance</span>.
+              From Concept to Creation — Beautiful design has the power to
+              captivate audiences
             </motion.p>
-          </div>
 
-          {/* Bottom credits */}
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Link href="/cars">
+                <button className="bg-midlife-red hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina flex items-center gap-2">
+                  Explore Our Fleet
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Video Section - Mobile */}
+        <div className="w-full px-4 pb-8">
           <motion.div
-            className="absolute bottom-8 left-8 text-xs text-midlife-light-gray"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            className="relative w-full h-[400px] sm:h-[500px] rounded-3xl overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
-            © model harmony
-          </motion.div>
-          <motion.div
-            className="absolute bottom-8 right-8 text-xs text-midlife-light-gray"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-          >
-            © 2026 made by <span className="underline">Ghost</span>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/videos/tesla_v2_hero.mp4" type="video/mp4" />
+            </video>
+
+            {/* Floating Badge */}
+            <motion.div
+              className="absolute bottom-4 right-4 bg-midlife-red text-white px-4 py-3 rounded-full shadow-2xl"
+              initial={{ opacity: 0, rotate: -45, scale: 0 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+            >
+              <div className="flex items-center gap-2">
+                <svg
+                  className="w-4 h-4 animate-pulse"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+                <span className="text-xs font-semibold font-termina whitespace-nowrap">
+                  CREATING WORK
+                  <br />
+                  THAT INSPIRES
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
-      </motion.div>
-    </motion.section>
+      </div>
+
+      {/* Desktop Layout - Scroll Effect */}
+      <div className="hidden lg:block sticky top-0 h-screen overflow-hidden">
+        <div className="h-screen flex flex-col lg:flex-row items-center relative">
+          {/* Left Section - Content */}
+          <motion.div
+            className="w-full lg:w-1/2 h-full flex items-center justify-center px-8 lg:px-16 py-20 lg:py-0 absolute left-0 z-10"
+            style={{ opacity: contentOpacity, x: contentX }}
+          >
+            <div className="max-w-2xl">
+              {/* Eyebrow Text */}
+              <motion.div
+                className="flex items-center gap-2 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <span className="text-midlife-red text-2xl">✱</span>
+                <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi">
+                  We are electric vehicle
+                </span>
+              </motion.div>
+
+              {/* Main Heading */}
+              <motion.h1
+                className="text-7xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                LEADERS
+              </motion.h1>
+
+              {/* Subheading */}
+              <motion.p
+                className="text-lg md:text-xl text-midlife-light-gray mb-8 leading-relaxed font-satoshi max-w-xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                From Concept to Creation — Beautiful design has the power to
+                captivate audiences
+              </motion.p>
+
+              {/* CTA Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <Link href="/cars">
+                  <button className="bg-midlife-red hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina flex items-center gap-2">
+                    Explore Our Fleet
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Right Section - Video (Expanding) */}
+          <motion.div
+            className="absolute right-0 h-full flex items-center justify-center"
+            style={{
+              width: videoWidth,
+              padding: videoPadding,
+            }}
+          >
+            <motion.div
+              className="relative w-full overflow-hidden"
+              style={{
+                height: videoHeight,
+                borderRadius: videoBorderRadius,
+              }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              {/* Video Container */}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/tesla_v2_hero.mp4" type="video/mp4" />
+              </video>
+
+              {/* Floating Badge */}
+              <motion.div
+                className="absolute bottom-8 right-8 bg-midlife-red text-white px-6 py-4 rounded-full shadow-2xl"
+                style={{ opacity: badgeOpacity }}
+                initial={{ opacity: 0, rotate: -45, scale: 0 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+              >
+                <div className="flex items-center gap-2">
+                  <svg
+                    className="w-5 h-5 animate-pulse"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                  <span className="text-sm font-semibold font-termina whitespace-nowrap">
+                    CREATING WORK
+                    <br />
+                    THAT INSPIRES
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }

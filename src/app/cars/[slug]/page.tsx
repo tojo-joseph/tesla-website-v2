@@ -72,7 +72,6 @@ export default async function CarDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-midlife-bg">
-      <Navigation />
       <main className="pt-20">
         <CarDetailClient car={car} />
       </main>

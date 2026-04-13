@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -15,51 +16,57 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "Models", href: "#models" },
-    { label: "Solar", href: "#solar" },
-    { label: "Charging", href: "#charging" },
-    { label: "Discover", href: "#discover" },
-  ];
-
-  const handleNavClick = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     }
-    setIsMobileMenuOpen(false);
-  };
+    return () => {
+      document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
+  const navLinks = [
+    { label: "Cars", href: "/cars" },
+    { label: "Solar", href: "/solar" },
+    { label: "Charging", href: "/charging" },
+    { label: "Discover", href: "/discover" },
+  ];
 
   return (
     <>
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed max-w-[100vw] top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-midlife-bg/95 backdrop-blur-md shadow-lg"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="w-full max-w-[100vw] overflow-hidden">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-8 md:px-12 lg:px-16 max-w-[1536px] mx-auto">
             {/* Tesla Logo */}
             <div className="flex items-center">
-              <div className="text-midlife-text font-bold text-2xl tracking-widest font-termina">
-                TESLA
-              </div>
+              <Link href="/">
+                <div className="text-midlife-text font-bold text-2xl tracking-widest font-termina">
+                  TESLA
+                </div>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="flex items-center space-x-8">
                 {navLinks.map((link) => (
-                  <button
-                    key={link.label}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-midlife-light-gray hover:text-midlife-text px-3 py-2 text-sm font-medium transition-colors font-satoshi"
-                  >
-                    {link.label}
-                  </button>
+                  <Link href={link.href} key={link.label}>
+                    <button className="text-midlife-light-gray hover:text-midlife-text px-3 py-2 text-sm font-medium transition-colors font-satoshi">
+                      {link.label}
+                    </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -91,30 +98,53 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Slide-Down Menu */}
-      <div
-        className={`fixed top-16 left-0 right-0 z-40 md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-          isMobileMenuOpen
-            ? "opacity-100 translate-y-0 max-h-screen"
-            : "opacity-0 -translate-y-full pointer-events-none max-h-0"
-        }`}
-      >
-        <div className="bg-midlife-bg/95 backdrop-blur-md shadow-lg">
-          <div className="px-4 py-6 max-w-full overflow-hidden">
-            <div className="space-y-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => handleNavClick(link.href)}
-                  className="block w-full text-left text-midlife-light-gray hover:text-midlife-text px-4 py-3 text-lg font-medium transition-colors font-termina overflow-hidden text-ellipsis"
+      {/* Mobile Full-Screen Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed max-w-[100vw] inset-0 z-50 md:hidden bg-midlife-bg/98 backdrop-blur-lg overflow-x-hidden">
+          <div className="h-full w-full flex flex-col max-w-[100vw]">
+            {/* Header with Logo and Close Button */}
+            <div className="flex items-center justify-between px-4 h-16 border-b border-midlife-dark-gray shrink-0">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="text-midlife-text font-bold text-2xl tracking-widest font-termina">
+                  TESLA
+                </div>
+              </Link>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-midlife-light-gray hover:text-midlife-text p-2"
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {link.label}
-                </button>
-              ))}
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-4 pt-8">
+                {navLinks.map((link) => (
+                  <Link href={link.href} key={link.label}>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full text-left text-midlife-light-gray hover:text-midlife-text py-4 text-xl font-medium transition-colors font-satoshi border-b border-midlife-dark-gray/30"
+                    >
+                      {link.label}
+                    </button>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

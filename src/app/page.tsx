@@ -7,7 +7,6 @@ import FinalSection from "@/components/sections/FinalSection";
 export default function Home() {
   return (
     <div className="min-h-screen bg-midlife-bg">
-      <Navbar />
       <main>
         <Hero />
         <MissionSection />
