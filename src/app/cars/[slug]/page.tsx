@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Navigation from "@/components/Navigation";
 import CarDetailClient from "./CarDetailClient";
 import { getCarBySlug, getAllCars } from "@/lib/data/cars";
 import { notFound } from "next/navigation";
