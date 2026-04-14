@@ -14,7 +14,6 @@ export default function Home() {
         <ProductSection />
         <FinalSection />
       </main>
-      <Footer />
     </div>
   );
 }

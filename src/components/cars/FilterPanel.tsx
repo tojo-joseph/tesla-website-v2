@@ -2,12 +2,19 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "@/store";
-import { setSearch, setMinPrice, setMaxPrice, resetFilters } from "@/store/filterSlice";
+import {
+  setSearch,
+  setMinPrice,
+  setMaxPrice,
+  resetFilters,
+} from "@/store/filterSlice";
 
 export default function FilterPanel() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [localSearch, setLocalSearch] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
+    null,
+  );
 
   // Redux state
   const filters = useAppSelector((state) => state.filters);
@@ -31,7 +38,7 @@ export default function FilterPanel() {
 
       setSearchTimeout(timeout);
     },
-    [dispatch, searchTimeout]
+    [dispatch, searchTimeout],
   );
 
   // Handle search input change
@@ -99,7 +106,7 @@ export default function FilterPanel() {
             className="absolute inset-0 bg-black/50"
             onClick={() => setIsMobileOpen(false)}
           />
-          
+
           {/* Panel */}
           <div className="relative bg-midlife-bg w-80 h-full shadow-xl overflow-y-auto">
             <div className="p-6">
@@ -143,9 +150,9 @@ export default function FilterPanel() {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:block w-60 bg-midlife-bg/95 backdrop-blur-md h-screen sticky top-16 overflow-y-auto">
-        <div className="p-6">
-          <h2 className="text-xl font-bold text-midlife-text mb-6 font-termina">
+      <div className="hidden md:block w-72 shrink-0">
+        <div className="sticky top-24">
+          <h2 className="text-2xl font-bold text-midlife-text mb-8 font-termina uppercase tracking-tight">
             Filters
           </h2>
 
@@ -183,16 +190,16 @@ function FilterContent({
   onResetFilters: () => void;
 }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Search Filter */}
       <div>
-        <label className="block text-sm font-medium text-midlife-light-gray mb-3 font-satoshi">
+        <label className="block text-sm font-semibold text-midlife-text mb-4 font-satoshi uppercase tracking-wide">
           Search
         </label>
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <svg
-              className="w-5 h-5 text-midlife-dark-gray"
+              className="w-5 h-5 text-midlife-light-gray"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -210,22 +217,24 @@ function FilterContent({
             value={localSearch}
             onChange={onSearchChange}
             placeholder="Search vehicles..."
-            className="w-full pl-10 pr-4 py-3 bg-midlife-dark-gray border border-midlife-dark-gray rounded-lg text-midlife-text placeholder-midlife-dark-gray focus:outline-none focus:ring-2 focus:ring-midlife-red focus:border-transparent transition-all duration-200 font-satoshi"
+            className="w-full pl-12 pr-4 py-3.5 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-xl text-midlife-text placeholder-midlife-light-gray/50 focus:outline-none focus:ring-2 focus:ring-midlife-red focus:border-transparent transition-all duration-200 font-satoshi"
           />
         </div>
       </div>
 
       {/* Price Range Filter */}
       <div>
-        <label className="block text-sm font-medium text-midlife-light-gray mb-3 font-satoshi">
+        <label className="block text-sm font-semibold text-midlife-text mb-4 font-satoshi uppercase tracking-wide">
           Price Range
         </label>
-        
+
         {/* Min Price */}
-        <div className="mb-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-midlife-dark-gray font-satoshi">Minimum</span>
-            <span className="text-sm font-medium text-midlife-text font-termina">
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider">
+              Minimum
+            </span>
+            <span className="text-base font-bold text-midlife-text font-termina">
               ${minPrice.toLocaleString()}
             </span>
           </div>
@@ -236,15 +245,17 @@ function FilterContent({
             step="1000"
             value={minPrice}
             onChange={onMinPriceChange}
-            className="w-full h-2 bg-midlife-dark-gray rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-2 bg-midlife-dark-gray/50 rounded-lg appearance-none cursor-pointer slider"
           />
         </div>
 
         {/* Max Price */}
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-midlife-dark-gray font-satoshi">Maximum</span>
-            <span className="text-sm font-medium text-midlife-text font-termina">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider">
+              Maximum
+            </span>
+            <span className="text-base font-bold text-midlife-text font-termina">
               ${maxPrice.toLocaleString()}
             </span>
           </div>
@@ -255,7 +266,7 @@ function FilterContent({
             step="1000"
             value={maxPrice}
             onChange={onMaxPriceChange}
-            className="w-full h-2 bg-midlife-dark-gray rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-2 bg-midlife-dark-gray/50 rounded-lg appearance-none cursor-pointer slider"
           />
         </div>
       </div>
@@ -263,7 +274,7 @@ function FilterContent({
       {/* Reset Filters Button */}
       <button
         onClick={onResetFilters}
-        className="w-full bg-midlife-red hover:bg-red-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina"
+        className="w-full bg-midlife-red hover:bg-red-600 text-white py-3.5 px-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 font-satoshi uppercase tracking-wide text-sm"
       >
         Reset Filters
       </button>

@@ -8,7 +8,7 @@ export default function Footer() {
     { label: "Home", href: "/" },
     { label: "About", href: "#about" },
     { label: "Cars", href: "/cars" },
-    { label: "Solar", href: "/solar" },
+    { label: "Energy", href: "/energy" },
     { label: "Charging", href: "/charging" },
     { label: "Contact", href: "#contact" },
   ];

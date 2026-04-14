@@ -26,8 +26,12 @@ export default function MissionSection() {
   return (
     <motion.section
       ref={missionRef}
-      className="min-h-screen bg-midlife-bg px-4 sm:px-8 lg:px-16 py-20 lg:py-16"
-      style={{ opacity: missionOpacity, y: missionY }}
+      className="min-h-screen px-4 sm:px-8 lg:px-16 py-20 lg:py-16"
+      style={{
+        opacity: missionOpacity,
+        y: missionY,
+        backgroundColor: "#FCFCFC",
+      }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -42,7 +46,7 @@ export default function MissionSection() {
             [ Who We Are ]
           </motion.div>
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-midlife-text font-termina uppercase leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-black font-termina uppercase leading-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -96,16 +100,16 @@ export default function MissionSection() {
           <div className="space-y-8">
             {/* Our Story Card */}
             <motion.div
-              className="bg-midlife-dark-gray rounded-2xl p-8"
+              className="bg-white rounded-2xl p-8 shadow-sm"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h3 className="text-2xl font-bold text-midlife-text mb-4 font-termina">
+              <h3 className="text-2xl font-bold text-black mb-4 font-termina">
                 Our story
               </h3>
-              <p className="text-midlife-light-gray leading-relaxed font-satoshi">
+              <p className="text-gray-700 leading-relaxed font-satoshi">
                 Our dedication to innovation, sustainability, and quality has
                 earned us recognition from industry leaders. We specialize in
                 crafting custom electric solutions, including performance

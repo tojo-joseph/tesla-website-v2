@@ -7,7 +7,6 @@ import { RootState } from "@/store";
 import FilterPanel from "@/components/cars/FilterPanel";
 import CarCard from "@/components/cars/CarCard";
 import Pagination from "@/components/cars/Pagination";
-import Navigation from "@/components/Navigation";
 
 export default function CarsPage() {
   const dispatch = useAppDispatch();
@@ -33,29 +32,31 @@ export default function CarsPage() {
 
   return (
     <div className="min-h-screen bg-midlife-bg">
-      <main className="pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="pt-24 pb-16">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-16">
+          {/* Header */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-4">
+              <h1 className="text-5xl md:text-6xl font-bold text-midlife-text font-termina uppercase tracking-tight">
+                Vehicles
+              </h1>
+            </div>
+            <p className="text-midlife-light-gray font-satoshi text-base ml-5">
+              {total > 0
+                ? `${total} vehicles found`
+                : "Browse our complete lineup of electric vehicles"}
+            </p>
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Filter Panel - Left Sidebar */}
             <FilterPanel />
 
             {/* Main Content */}
             <div className="flex-1">
-              {/* Header */}
-              <div className="mb-8">
-                <h1 className="text-4xl md:text-5xl font-bold text-midlife-text mb-4 font-termina">
-                  Tesla Vehicles
-                </h1>
-                <p className="text-midlife-light-gray font-satoshi">
-                  {total > 0
-                    ? `${total} vehicles found`
-                    : "Browse our complete lineup of electric vehicles"}
-                </p>
-              </div>
-
               {/* Loading State */}
               {loading && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {Array.from({ length: 9 }).map((_, index) => (
                     <div
                       key={index}
@@ -80,7 +81,7 @@ export default function CarsPage() {
 
               {/* Cars Grid */}
               {!loading && cars.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {cars.map((car) => (
                     <CarCard key={car.id} car={car} />
                   ))}

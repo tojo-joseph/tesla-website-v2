@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "@/store";
 import { setColor, setVariant } from "@/store/configSlice";
 import { Car, Color, Variant } from "@/store/carSlice";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 interface CarDetailClientProps {
   car: Car;
@@ -50,92 +51,143 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
   const totalPrice = car.basePrice + (currentVariant?.price || 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-16 py-8">
+      {/* Header Section */}
+      <motion.div
+        className="mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-midlife-text mb-3 font-termina uppercase tracking-tight">
+          {car.name}
+        </h1>
+        <p className="text-lg md:text-xl text-midlife-red font-satoshi">
+          {car.tagline}
+        </p>
+      </motion.div>
+
       <div className="grid lg:grid-cols-2 gap-12">
         {/* LEFT COLUMN - Sticky */}
-        <div className="lg:sticky lg:top-24 h-fit">
+        <div className="lg:sticky lg:top-24 h-fit space-y-6">
           {/* Car Image */}
-          <div className="relative w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden mb-6">
+          <motion.div
+            className="relative w-full h-[300px] lg:h-[400px] rounded-3xl overflow-hidden bg-midlife-dark-gray"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <Image
               src={currentColor?.imageUrl || car.images[0]?.url}
               alt={`${car.name} in ${currentColor?.name || "default color"}`}
               fill
-              className="object-cover transition-opacity duration-300"
-              key={currentColor?.id} // Key to trigger re-render and fade
+              className="object-cover transition-opacity duration-500"
+              key={currentColor?.id}
             />
-          </div>
+          </motion.div>
 
           {/* Color Selector */}
-          <ColorSelector
-            colors={colors}
-            selectedColorId={selectedColorId || undefined}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <ColorSelector
+              colors={colors}
+              selectedColorId={selectedColorId || undefined}
+            />
+          </motion.div>
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="space-y-8">
-          {/* Car Info */}
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-midlife-text mb-2 font-termina">
-              {car.name}
-            </h1>
-            <p className="text-xl text-midlife-red mb-4 font-satoshi">
-              {car.tagline}
-            </p>
-            <div className="text-3xl font-bold text-midlife-text mb-4 font-termina">
+        <div className="space-y-6">
+          {/* Price */}
+          <motion.div
+            className="flex items-baseline gap-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="text-4xl md:text-5xl font-bold text-midlife-text font-termina">
               ${totalPrice.toLocaleString()}
             </div>
-            <p className="text-midlife-light-gray leading-relaxed font-satoshi">
-              {car.description}
-            </p>
-          </div>
+            <div className="text-midlife-light-gray font-satoshi text-sm">
+              Starting price
+            </div>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            className="text-midlife-light-gray leading-relaxed font-satoshi"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            {car.description}
+          </motion.p>
 
           {/* Performance Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-midlife-dark-gray rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-midlife-text font-termina">
+          <motion.div
+            className="grid grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="bg-midlife-dark-gray/50 rounded-2xl p-4 border border-midlife-dark-gray">
+              <div className="text-3xl font-bold text-midlife-text font-termina mb-1">
                 {car.range}
               </div>
-              <div className="text-sm text-midlife-light-gray font-satoshi">
+              <div className="text-sm text-midlife-light-gray font-satoshi uppercase tracking-wider">
                 Range (mi)
               </div>
             </div>
-            <div className="bg-midlife-dark-gray rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-midlife-text font-termina">
+            <div className="bg-midlife-dark-gray/50 rounded-2xl p-4 border border-midlife-dark-gray">
+              <div className="text-3xl font-bold text-midlife-text font-termina mb-1">
                 {car.zeroToSixty}s
               </div>
-              <div className="text-sm text-midlife-light-gray font-satoshi">
+              <div className="text-sm text-midlife-light-gray font-satoshi uppercase tracking-wider">
                 0-60 mph
               </div>
             </div>
-            <div className="bg-midlife-dark-gray rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-midlife-text font-termina">
+            <div className="bg-midlife-dark-gray/50 rounded-2xl p-4 border border-midlife-dark-gray">
+              <div className="text-3xl font-bold text-midlife-text font-termina mb-1">
                 {car.topSpeed}
               </div>
-              <div className="text-sm text-midlife-light-gray font-satoshi">
-                Top Speed
+              <div className="text-sm text-midlife-light-gray font-satoshi uppercase tracking-wider">
+                Top Speed (mph)
               </div>
             </div>
-            <div className="bg-midlife-dark-gray rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-midlife-text font-termina">
+            <div className="bg-midlife-dark-gray/50 rounded-2xl p-4 border border-midlife-dark-gray">
+              <div className="text-3xl font-bold text-midlife-text font-termina mb-1">
                 {currentVariant?.horsepower || car.variants[0]?.horsepower}
               </div>
-              <div className="text-sm text-midlife-light-gray font-satoshi">
+              <div className="text-sm text-midlife-light-gray font-satoshi uppercase tracking-wider">
                 Horsepower
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Variant Selector */}
-          <VariantSelector
-            variants={car.variants}
-            selectedVariantId={selectedVariantId || undefined}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <VariantSelector
+              variants={car.variants}
+              selectedVariantId={selectedVariantId || undefined}
+            />
+          </motion.div>
 
           {/* Total Price Display */}
-          <div className="bg-midlife-dark-gray rounded-lg p-6">
+          <motion.div
+            className="bg-midlife-dark-gray/30 rounded-2xl p-6 border border-midlife-dark-gray"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-midlife-light-gray font-satoshi">
+              <span className="text-midlife-light-gray font-satoshi uppercase tracking-wide">
                 Total Price
               </span>
               <span className="text-3xl font-bold text-midlife-text font-termina">
@@ -146,15 +198,21 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
               Base: ${car.basePrice.toLocaleString()} + Variant: $
               {currentVariant?.price?.toLocaleString() || 0}
             </div>
-          </div>
+          </motion.div>
 
           {/* Build and Price Button */}
-          <Link
-            href={`/configure/${car.slug}`}
-            className="block w-full bg-midlife-red hover:bg-red-600 text-white py-4 px-6 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 text-center font-termina"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
-            Build and Price
-          </Link>
+            <Link
+              href={`/configure/${car.slug}`}
+              className="block w-full bg-midlife-red hover:bg-red-600 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 text-center font-satoshi uppercase tracking-wide"
+            >
+              Build and Price
+            </Link>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -178,7 +236,7 @@ function ColorSelector({
 
   return (
     <div>
-      <h3 className="text-lg font-medium text-midlife-text mb-4 font-termina">
+      <h3 className="text-lg font-bold text-midlife-text mb-4 font-termina uppercase tracking-tight">
         Color
       </h3>
       <div className="flex gap-3 flex-wrap">
@@ -186,10 +244,10 @@ function ColorSelector({
           <button
             key={color.id}
             onClick={() => dispatch(setColor(color.id))}
-            className={`w-12 h-12 rounded-full border-2 transition-all duration-200 ${
+            className={`w-12 h-12 rounded-full border-3 transition-all duration-300 ${
               selectedColorId === color.id
-                ? "border-white scale-110"
-                : "border-midlife-dark-gray hover:border-midlife-light-gray"
+                ? "border-midlife-red scale-110 shadow-lg shadow-midlife-red/50"
+                : "border-midlife-dark-gray hover:border-midlife-light-gray hover:scale-105"
             }`}
             style={{ backgroundColor: color.hexCode }}
             title={color.name}
@@ -218,32 +276,30 @@ function VariantSelector({
 
   return (
     <div>
-      <h3 className="text-lg font-medium text-midlife-text mb-4 font-termina">
-        Trim
+      <h3 className="text-lg font-bold text-midlife-text mb-4 font-termina uppercase tracking-tight">
+        Select Trim
       </h3>
       <div className="space-y-3">
         {variants.map((variant) => (
           <button
             key={variant.id}
             onClick={() => dispatch(setVariant(variant.id))}
-            className={`w-full p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+            className={`w-full p-5 rounded-2xl border-2 transition-all duration-300 text-left ${
               selectedVariantId === variant.id
-                ? "border-midlife-red bg-midlife-red/10"
-                : "border-midlife-dark-gray hover:border-midlife-light-gray bg-midlife-dark-gray/50"
+                ? "border-midlife-red bg-midlife-red/10 shadow-lg"
+                : "border-midlife-dark-gray hover:border-midlife-light-gray bg-midlife-dark-gray/30"
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-midlife-text font-medium font-termina">
-                  {variant.name}
-                </div>
-                <div className="text-sm text-midlife-light-gray font-satoshi">
-                  {variant.horsepower} hp / {variant.torque} lb-ft
-                </div>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-xl text-midlife-text font-bold font-termina">
+                {variant.name}
               </div>
-              <div className="text-midlife-text font-bold font-termina">
+              <div className="text-xl text-midlife-text font-bold font-termina">
                 +${variant.price.toLocaleString()}
               </div>
+            </div>
+            <div className="text-sm text-midlife-light-gray font-satoshi">
+              {variant.horsepower} hp / {variant.torque} lb-ft torque
             </div>
           </button>
         ))}
