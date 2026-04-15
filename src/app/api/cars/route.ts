@@ -27,10 +27,7 @@ export async function GET(request: NextRequest) {
     const where: any = {};
 
     if (search) {
-      where.OR = [
-        { name: { contains: search, mode: "insensitive" } },
-        { tagline: { contains: search, mode: "insensitive" } },
-      ];
+      where.name = { contains: search, mode: "insensitive" };
     }
 
     if (minPrice !== undefined || maxPrice !== undefined) {

@@ -273,9 +273,9 @@ function VariantSelector({
           <button
             key={variant.id}
             onClick={() => dispatch(setVariant(variant.id))}
-            className={`w-full p-5 rounded-2xl border-2 transition-all duration-300 text-left ${
+            className={`w-full p-5 cursor-pointer rounded-2xl border-2 transition-all duration-300 text-left ${
               selectedVariantId === variant.id
-                ? "border-midlife-red bg-midlife-red/10 shadow-lg"
+                ? "border-[#0EA5E9] bg-[#0EA5E9]/10 shadow-lg"
                 : "border-midlife-dark-gray hover:border-midlife-light-gray bg-midlife-dark-gray/30"
             }`}
           >

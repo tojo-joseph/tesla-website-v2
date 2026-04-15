@@ -52,49 +52,72 @@ export default function MissionSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            WE ARE LEADING ELECTRIC
+            BUILDING A WORLD OF
             <br />
-            VEHICLE COMPANY
+            AMAZING ABUNDANCE
           </motion.h2>
         </div>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Left Column - Image and Badge */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative rounded-2xl overflow-hidden border-4 border-midlife-red/20">
-              <Image
-                src="/images/about_img.jpg"
-                alt="Tesla Vision"
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
-              />
-              {/* Badge Overlay */}
-              {/* <div className="absolute bottom-6 left-6 bg-white rounded-full p-4 shadow-xl">
-                <div className="flex flex-col items-center justify-center">
-                  <svg
-                    className="w-12 h-12 text-midlife-red"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  <div className="text-xs font-bold text-gray-800 mt-1 text-center">
-                    ELECTRIC
-                    <br />
-                    INNOVATION
+          {/* Left Column - Image and Content */}
+          <div className="space-y-8">
+            {/* First Image */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative rounded-2xl overflow-hidden border-4 border-midlife-red/20">
+                <Image
+                  src="/images/about_img.jpg"
+                  alt="Tesla Vision"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+                {/* Badge Overlay */}
+                {/* <div className="absolute bottom-6 left-6 bg-white rounded-full p-4 shadow-xl">
+                  <div className="flex flex-col items-center justify-center">
+                    <svg
+                      className="w-12 h-12 text-midlife-red"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <div className="text-xs font-bold text-gray-800 mt-1 text-center">
+                      ELECTRIC
+                      <br />
+                      INNOVATION
+                    </div>
                   </div>
-                </div>
-              </div> */}
-            </div>
-          </motion.div>
+                </div> */}
+              </div>
+            </motion.div>
+
+            {/* New Content Card */}
+            <motion.div
+              className="bg-white rounded-2xl p-8 shadow-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h3 className="text-2xl font-bold text-black mb-4 font-termina">
+                Our Mission
+              </h3>
+              <p className="text-gray-700 leading-relaxed font-satoshi">
+                To shift humanity away from fossil fuels, we need extreme scale.
+                Headquartered in Texas, we operate six huge, vertically
+                integrated factories across three continents. With over 100,000
+                employees, our teams design, build, sell and service our
+                products in-house.
+              </p>
+            </motion.div>
+          </div>
 
           {/* Right Column - Content Cards */}
           <div className="space-y-8">
@@ -107,14 +130,15 @@ export default function MissionSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h3 className="text-2xl font-bold text-black mb-4 font-termina">
-                Our story
+                About Us
               </h3>
               <p className="text-gray-700 leading-relaxed font-satoshi">
-                Our dedication to innovation, sustainability, and quality has
-                earned us recognition from industry leaders. We specialize in
-                crafting custom electric solutions, including performance
-                optimization, battery technology, autonomous driving, and
-                sustainable energy, tailored to meet the world's needs.
+                Our vehicles are some of the safest in the world. After safety,
+                our goal is to make every Tesla the most fun you could possibly
+                have in a vehicle. We build features that make being in your
+                vehicle more enjoyable—from gaming to movies, easter eggs and
+                more. With over-the-air software updates, we regularly introduce
+                features at the push of a button.
               </p>
             </motion.div>
 

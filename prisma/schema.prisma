@@ -78,3 +78,13 @@ model BuildConfig {
   variant    Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
   color      Color   @relation(fields: [colorId], references: [id], onDelete: Cascade)
 }
+
+model Contact {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  serviceNeeded String
+  message       String   @db.Text
+  source        String   @default("homepage")
+  createdAt     DateTime @default(now())
+}

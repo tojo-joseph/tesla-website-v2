@@ -1,10 +1,21 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function FinalSection() {
   const finalRef = useRef(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    serviceNeeded: "Vehicle Purchase Inquiry",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   const { scrollYProgress: finalScroll } = useScroll({
     target: finalRef,
@@ -77,7 +88,49 @@ export default function FinalSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <form className="space-y-6">
+            <form
+              className="space-y-6"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setIsSubmitting(true);
+                setSubmitStatus({ type: null, message: "" });
+
+                try {
+                  const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...formData, source: "homepage" }),
+                  });
+
+                  const data = await response.json();
+
+                  if (response.ok) {
+                    setSubmitStatus({
+                      type: "success",
+                      message: data.message,
+                    });
+                    setFormData({
+                      name: "",
+                      email: "",
+                      serviceNeeded: "Vehicle Purchase Inquiry",
+                      message: "",
+                    });
+                  } else {
+                    setSubmitStatus({
+                      type: "error",
+                      message: data.error || "Failed to submit form",
+                    });
+                  }
+                } catch (error) {
+                  setSubmitStatus({
+                    type: "error",
+                    message: "Network error. Please try again.",
+                  });
+                }
+
+                setIsSubmitting(false);
+              }}
+            >
               {/* Name and Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -87,6 +140,11 @@ export default function FinalSection() {
                   <input
                     type="text"
                     placeholder="John Smith"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
                     className="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-300 focus:border-midlife-red outline-none transition-colors font-satoshi"
                   />
                 </div>
@@ -97,6 +155,11 @@ export default function FinalSection() {
                   <input
                     type="email"
                     placeholder="johnsmith@gmail.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
                     className="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-300 focus:border-midlife-red outline-none transition-colors font-satoshi"
                   />
                 </div>
@@ -107,7 +170,14 @@ export default function FinalSection() {
                 <label className="block text-sm text-gray-700 mb-2 font-satoshi">
                   Service Needed ?
                 </label>
-                <select className="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-300 focus:border-midlife-red outline-none transition-colors font-satoshi appearance-none cursor-pointer">
+                <select
+                  value={formData.serviceNeeded}
+                  onChange={(e) =>
+                    setFormData({ ...formData, serviceNeeded: e.target.value })
+                  }
+                  required
+                  className="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-300 focus:border-midlife-red outline-none transition-colors font-satoshi appearance-none cursor-pointer"
+                >
                   <option>Vehicle Purchase Inquiry</option>
                   <option>Test Drive Booking</option>
                   <option>Energy Products</option>
@@ -124,16 +194,35 @@ export default function FinalSection() {
                 <textarea
                   rows={6}
                   placeholder="Hello, I'd like to enquire about..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  required
                   className="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-300 focus:border-midlife-red outline-none transition-colors resize-none font-satoshi"
                 ></textarea>
               </div>
 
+              {/* Submit Status */}
+              {submitStatus.type && (
+                <div
+                  className={`p-4 rounded-lg ${
+                    submitStatus.type === "success"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  <p className="font-satoshi text-sm">{submitStatus.message}</p>
+                </div>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 bg-[#0EA5E9] text-white rounded-full font-bold text-lg hover:bg-[#0EA5E9]/90 transition-colors font-satoshi cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-[#0EA5E9] text-white rounded-full font-bold text-lg hover:bg-[#0EA5E9]/90 transition-colors font-satoshi cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Contact Us
+                {isSubmitting ? "Sending..." : "Contact Us"}
               </button>
             </form>
           </motion.div>

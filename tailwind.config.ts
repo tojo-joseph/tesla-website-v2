@@ -15,7 +15,7 @@ export default {
         "tesla-gray": "#393C41",
         "tesla-light": "#F4F4F4",
         // Midlife engineering inspired colors
-        "midlife-bg": "#1a1a1a",
+        "midlife-bg": "#000000",
         "midlife-text": "#e0e0e0",
         "midlife-red": "#ff0000",
         "midlife-dark-gray": "#333333",

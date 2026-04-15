@@ -433,12 +433,20 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   <p className="text-midlife-light-gray font-satoshi mb-6">
                     No color options available for this model.
                   </p>
-                  <button
-                    onClick={() => setCurrentStep(1)}
-                    className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
-                  >
-                    Back to Variant
-                  </button>
+                  <div className="flex flex-col gap-4 max-w-md mx-auto">
+                    <button
+                      onClick={() => setCurrentStep(1)}
+                      className="bg-midlife-dark-gray hover:bg-midlife-dark-gray/70 text-midlife-text py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
+                    >
+                      Back to Variant
+                    </button>
+                    <button
+                      onClick={() => setCurrentStep(3)}
+                      className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
+                    >
+                      Review Order
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

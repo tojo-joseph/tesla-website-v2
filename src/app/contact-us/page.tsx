@@ -2,8 +2,21 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function ContactUsPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    serviceNeeded: "Vehicle Purchase Inquiry",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   const offices = [
     {
       name: "Tesla Headquarters - Gigafactory Texas",
@@ -130,10 +143,50 @@ export default function ContactUsPage() {
                     Send Us a Message
                   </h3>
                   <form
-                    action={`mailto:tojoj130@gmail.com`}
-                    method="post"
-                    encType="text/plain"
                     className="space-y-6"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setIsSubmitting(true);
+                      setSubmitStatus({ type: null, message: "" });
+
+                      try {
+                        const response = await fetch("/api/contact", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            ...formData,
+                            source: "contact-page",
+                          }),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                          setSubmitStatus({
+                            type: "success",
+                            message: data.message,
+                          });
+                          setFormData({
+                            name: "",
+                            email: "",
+                            serviceNeeded: "Vehicle Purchase Inquiry",
+                            message: "",
+                          });
+                        } else {
+                          setSubmitStatus({
+                            type: "error",
+                            message: data.error || "Failed to submit form",
+                          });
+                        }
+                      } catch (error) {
+                        setSubmitStatus({
+                          type: "error",
+                          message: "Network error. Please try again.",
+                        });
+                      }
+
+                      setIsSubmitting(false);
+                    }}
                   >
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
@@ -147,6 +200,10 @@ export default function ContactUsPage() {
                           type="text"
                           id="name"
                           name="name"
+                          value={formData.name}
+                          onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
                           required
                           className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
                           placeholder="Your name"
@@ -163,50 +220,42 @@ export default function ContactUsPage() {
                           type="email"
                           id="email"
                           name="email"
+                          value={formData.email}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                           required
                           className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
                           placeholder="your.email@example.com"
                         />
                       </div>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label
-                          htmlFor="phone"
-                          className="block text-white font-satoshi mb-2"
-                        >
-                          Phone
-                        </label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
-                          placeholder="(123) 456-7890"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="subject"
-                          className="block text-white font-satoshi mb-2"
-                        >
-                          Subject *
-                        </label>
-                        <select
-                          id="subject"
-                          name="subject"
-                          required
-                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
-                        >
-                          <option value="">Select a subject</option>
-                          <option value="Test Drive">
-                            Schedule Test Drive
-                          </option>
-                          <option value="Order Inquiry">Order Inquiry</option>
-                          <option value="Support">Customer Support</option>
-                          <option value="General">General Inquiry</option>
-                        </select>
-                      </div>
+                    <div>
+                      <label
+                        htmlFor="serviceNeeded"
+                        className="block text-white font-satoshi mb-2"
+                      >
+                        Service Needed *
+                      </label>
+                      <select
+                        id="serviceNeeded"
+                        name="serviceNeeded"
+                        value={formData.serviceNeeded}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            serviceNeeded: e.target.value,
+                          })
+                        }
+                        required
+                        className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors cursor-pointer [&>option]:text-black"
+                      >
+                        <option>Vehicle Purchase Inquiry</option>
+                        <option>Test Drive Booking</option>
+                        <option>Energy Products</option>
+                        <option>Service & Support</option>
+                        <option>General Inquiry</option>
+                      </select>
                     </div>
                     <div>
                       <label
@@ -218,17 +267,37 @@ export default function ContactUsPage() {
                       <textarea
                         id="message"
                         name="message"
+                        value={formData.message}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                         required
                         rows={6}
                         className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors resize-none"
                         placeholder="Tell us how we can help you..."
                       />
                     </div>
+                    {/* Submit Status */}
+                    {submitStatus.type && (
+                      <div
+                        className={`p-4 rounded-lg ${
+                          submitStatus.type === "success"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        <p className="font-satoshi text-sm">
+                          {submitStatus.message}
+                        </p>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full md:w-auto px-8 py-4 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-xl transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
+                      disabled={isSubmitting}
+                      className="w-full md:w-auto px-8 py-4 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-xl transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
                   </form>
                 </motion.div>

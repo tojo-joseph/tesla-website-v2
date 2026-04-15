@@ -115,6 +115,7 @@ export default function HeroSection() {
               muted
               loop
               playsInline
+              preload="auto"
               className="w-full h-full object-cover"
             >
               <source
@@ -248,6 +249,7 @@ export default function HeroSection() {
                 muted
                 loop
                 playsInline
+                preload="auto"
                 className="w-full h-full object-cover"
               >
                 <source
