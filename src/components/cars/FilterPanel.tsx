@@ -238,16 +238,42 @@ function FilterContent({
           Price Range
         </label>
 
-        {/* Min Price */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider">
-              Minimum
+        {/* Price Range Display */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="text-center">
+            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider block mb-1">
+              Min
             </span>
             <span className="text-base font-bold text-midlife-text font-termina">
               ${minPrice.toLocaleString()}
             </span>
           </div>
+          <span className="text-midlife-light-gray">—</span>
+          <div className="text-center">
+            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider block mb-1">
+              Max
+            </span>
+            <span className="text-base font-bold text-midlife-text font-termina">
+              ${maxPrice.toLocaleString()}
+            </span>
+          </div>
+        </div>
+
+        {/* Dual Range Slider */}
+        <div className="relative h-2 mb-6">
+          {/* Track Background */}
+          <div className="absolute w-full h-2 bg-midlife-dark-gray/50 rounded-lg" />
+
+          {/* Active Range */}
+          <div
+            className="absolute h-2 bg-[#0EA5E9] rounded-lg"
+            style={{
+              left: `${(minPrice / 200000) * 100}%`,
+              right: `${100 - (maxPrice / 200000) * 100}%`,
+            }}
+          />
+
+          {/* Min Price Slider */}
           <input
             type="range"
             min="0"
@@ -255,20 +281,10 @@ function FilterContent({
             step="1000"
             value={minPrice}
             onChange={onMinPriceChange}
-            className="w-full h-2 bg-midlife-dark-gray/50 rounded-lg appearance-none cursor-pointer slider"
+            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0EA5E9] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0EA5E9] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-lg"
           />
-        </div>
 
-        {/* Max Price */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs text-midlife-light-gray font-satoshi uppercase tracking-wider">
-              Maximum
-            </span>
-            <span className="text-base font-bold text-midlife-text font-termina">
-              ${maxPrice.toLocaleString()}
-            </span>
-          </div>
+          {/* Max Price Slider */}
           <input
             type="range"
             min="0"
@@ -276,7 +292,7 @@ function FilterContent({
             step="1000"
             value={maxPrice}
             onChange={onMaxPriceChange}
-            className="w-full h-2 bg-midlife-dark-gray/50 rounded-lg appearance-none cursor-pointer slider"
+            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0EA5E9] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0EA5E9] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-lg"
           />
         </div>
       </div>
