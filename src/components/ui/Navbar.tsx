@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+import { useAppDispatch } from "@/store";
+import { setPage } from "@/store/filterSlice";
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,8 +36,6 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Cars", href: "/cars" },
-    { label: "Energy", href: "/energy" },
-    { label: "Charging", href: "/charging" },
     { label: "Contact Us", href: "/contact-us" },
   ];
 
@@ -76,6 +78,11 @@ export default function Navbar() {
                     </button>
                   ) : (
                     <button
+                      onClick={() => {
+                        if (link.label === "Cars") {
+                          dispatch(setPage(1));
+                        }
+                      }}
                       className={`cursor-pointer px-3 py-2 text-sm font-medium transition-colors font-satoshi whitespace-nowrap ${
                         isScrolled
                           ? "text-gray-700 hover:text-black"
@@ -160,7 +167,12 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <Link href={link.href} key={link.label}>
                   <button
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      if (link.label === "Cars") {
+                        dispatch(setPage(1));
+                      }
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="block w-full cursor-pointer text-left text-midlife-light-gray hover:text-midlife-text py-4 text-xl font-medium transition-colors font-satoshi border-b border-midlife-dark-gray/30"
                   >
                     {link.label}

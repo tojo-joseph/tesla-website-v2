@@ -226,7 +226,7 @@ export default function ContactUsPage() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full md:w-auto px-8 py-4 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-xl transition-all duration-300 font-satoshi uppercase tracking-wide"
+                      className="w-full md:w-auto px-8 py-4 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-xl transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                     >
                       Send Message
                     </button>

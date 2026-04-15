@@ -43,20 +43,22 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <span className="text-midlife-red text-2xl">✱</span>
-              <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi">
-                We are electric vehicle
+              <span className="text-[#0EA5E9] text-2xl">⚡</span>
+              <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi uppercase">
+                The Future is Electric
               </span>
             </motion.div>
 
             {/* Main Heading */}
             <motion.h1
-              className="text-5xl sm:text-6xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
+              className="text-5xl sm:text-6xl md:text-4xl lg:text-4xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              LEADERS
+              DRIVE THE
+              <br />
+              REVOLUTION
             </motion.h1>
 
             {/* Subheading */}
@@ -66,8 +68,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              From Concept to Creation — Beautiful design has the power to
-              captivate audiences
+              Zero emissions. Maximum performance. Experience the perfect fusion
+              of sustainable innovation and exhilarating power.
             </motion.p>
 
             {/* CTA Button */}
@@ -77,7 +79,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Link href="/cars">
-                <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9]">
+                <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9] cursor-pointer">
                   <span className="relative z-10">Explore Our Fleet</span>
                   <span className="relative z-10 bg-[#0EA5E9] group-hover:bg-white/20 p-2 rounded transition-all duration-300">
                     <svg
@@ -163,20 +165,22 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <span className="text-midlife-red text-2xl">✱</span>
-                <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi">
-                  We are electric vehicle
+                <span className="text-[#0EA5E9] text-2xl">⚡</span>
+                <span className="text-midlife-light-gray text-sm tracking-wider font-satoshi uppercase">
+                  The Future is Electric
                 </span>
               </motion.div>
 
               {/* Main Heading */}
               <motion.h1
-                className="text-7xl md:text-8xl lg:text-9xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
+                className="text-7xl md:text-7xl lg:text-8xl font-bold leading-none mb-6 text-midlife-text font-termina uppercase"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                LEADERS
+                DRIVE THE
+                <br />
+                REVOLUTION
               </motion.h1>
 
               {/* Subheading */}
@@ -186,8 +190,8 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                From Concept to Creation — Beautiful design has the power to
-                captivate audiences
+                Zero emissions. Maximum performance. Experience the perfect
+                fusion of sustainable innovation and exhilarating power.
               </motion.p>
 
               {/* CTA Button */}
@@ -197,7 +201,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <Link href="/cars">
-                  <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9]">
+                  <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9] cursor-pointer">
                     <span className="relative z-10">Explore Our Fleet</span>
                     <span className="relative z-10 bg-[#0EA5E9] group-hover:bg-white/20 p-2 rounded transition-all duration-300">
                       <svg

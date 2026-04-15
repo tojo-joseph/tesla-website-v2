@@ -19,16 +19,34 @@ export default function CarCard({ car }: CarCardProps) {
   }, [car]);
 
   const modelIdentifier = (car: Car) => {
-    if (car.description.includes("sedan")) {
-      setModelType("Sedan");
-    } else if (car.description.includes("suv")) {
-      setModelType("SUV");
-    } else if (car.description.includes("truck")) {
+    if (car.name === "Model S") {
+      setModelType("Luxury Sedan");
+    } else if (car.name === "Model 3") {
+      setModelType("Sport Sedan");
+    } else if (car.name === "Model X") {
+      setModelType("Luxury SUV");
+    } else if (car.name === "Model Y") {
+      setModelType("Midsize SUV");
+    } else if (car.name === "Model 3") {
+      setModelType("Sport Sedan");
+    } else if (car.name === "Cybertruck") {
       setModelType("Utility Truck");
-    } else if (car.description.includes("grand-tourer")) {
-      setModelType("GT");
-    } else if (car.description.includes("hybrid")) {
-      setModelType("hybrid");
+    } else if (car.name === "Tesla Model A") {
+      setModelType("Sports Coupe");
+    } else if (car.name === "Tesla Model B") {
+      setModelType("Hatchback");
+    } else if (car.name === "Tesla Model C") {
+      setModelType("Sport Sedan");
+    } else if (car.name === "Tesla Model D") {
+      setModelType("SUV");
+    } else if (car.name === "Tesla Model E") {
+      setModelType("SUV");
+    } else if (car.name === "Tesla Model F") {
+      setModelType("Sedan");
+    } else if (car.name === "Tesla Model G") {
+      setModelType("SUV");
+    } else if (car.name === "Tesla Model H") {
+      setModelType("Sport Sedan");
     } else {
       setModelType("SUV");
     }

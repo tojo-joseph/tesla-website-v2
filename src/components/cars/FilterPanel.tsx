@@ -80,7 +80,7 @@ export default function FilterPanel() {
       <div className="md:hidden fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+          className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer"
         >
           <svg
             className="w-6 h-6"
@@ -274,7 +274,7 @@ function FilterContent({
       {/* Reset Filters Button */}
       <button
         onClick={onResetFilters}
-        className="w-full bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-3.5 px-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 font-satoshi uppercase tracking-wide text-sm"
+        className="w-full bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-3.5 px-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 font-satoshi uppercase tracking-wide text-sm cursor-pointer"
       >
         Reset Filters
       </button>

@@ -237,7 +237,7 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   </div>
                   <button
                     onClick={() => setCurrentStep(2)}
-                    className="w-full mt-6 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide"
+                    className="w-full mt-6 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                   >
                     Continue to Color
                   </button>
@@ -285,13 +285,13 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   <div className="flex gap-4 mt-6">
                     <button
                       onClick={() => setCurrentStep(1)}
-                      className="flex-1 bg-midlife-dark-gray hover:bg-midlife-dark-gray/70 text-midlife-text py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide"
+                      className="flex-1 bg-midlife-dark-gray hover:bg-midlife-dark-gray/70 text-midlife-text py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                     >
                       Back
                     </button>
                     <button
                       onClick={() => setCurrentStep(3)}
-                      className="flex-1 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide"
+                      className="flex-1 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                     >
                       Review Order
                     </button>
@@ -387,13 +387,13 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   <div className="space-y-4">
                     <a
                       href={`mailto:tojoj130@gmail.com?subject=Order Request - ${car.name}&body=Hi,%0D%0A%0D%0AI would like to order the following configuration:%0D%0A%0D%0ACar: ${car.name}%0D%0AVariant: ${currentVariant?.name}%0D%0AColor: ${currentColor?.name}%0D%0ATotal Price: $${totalPrice.toLocaleString()}%0D%0A%0D%0APlease contact me to proceed with the order.%0D%0A%0D%0AThank you!`}
-                      className="block w-full bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide text-center"
+                      className="block w-full bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide text-center cursor-pointer"
                     >
                       Order Now
                     </a>
                     <Link
                       href={`/contact-us?type=test-drive&car=${car.name}&variant=${currentVariant?.name}&color=${currentColor?.name}`}
-                      className="block w-full bg-transparent border-2 border-midlife-text text-midlife-text hover:bg-midlife-text hover:text-midlife-bg py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide text-center"
+                      className="block w-full bg-transparent border-2 border-midlife-text text-midlife-text hover:bg-midlife-text hover:text-midlife-bg py-4 px-6 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide text-center cursor-pointer"
                     >
                       Schedule Test Drive
                     </Link>
@@ -421,7 +421,7 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   </p>
                   <Link
                     href={`/cars/${car.slug}`}
-                    className="inline-block bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide"
+                    className="inline-block bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                   >
                     Back to Details
                   </Link>
@@ -435,7 +435,7 @@ export default function ConfigureClient({ car }: ConfigureClientProps) {
                   </p>
                   <button
                     onClick={() => setCurrentStep(1)}
-                    className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide"
+                    className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-8 rounded-xl font-bold transition-all duration-300 font-satoshi uppercase tracking-wide cursor-pointer"
                   >
                     Back to Variant
                   </button>
