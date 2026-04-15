@@ -266,7 +266,7 @@ function VariantSelector({
   return (
     <div>
       <h3 className="text-lg font-bold text-midlife-text mb-4 font-termina uppercase tracking-tight">
-        Select Trim
+        Select Variant
       </h3>
       <div className="space-y-3">
         {variants.map((variant) => (
