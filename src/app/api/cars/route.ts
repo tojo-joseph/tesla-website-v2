@@ -52,16 +52,32 @@ export async function GET(request: NextRequest) {
           take: 1,
         },
       },
-      orderBy: { createdAt: "desc" },
       skip,
       take: limit,
+    });
+
+    // Sort to prioritize actual Tesla models over dummy models
+    const sortedCars = cars.sort((a, b) => {
+      const realTeslaModels = [
+        "model-s",
+        "model-3",
+        "model-x",
+        "model-y",
+        "cybertruck",
+      ];
+      const aIsReal = realTeslaModels.includes(a.slug);
+      const bIsReal = realTeslaModels.includes(b.slug);
+
+      if (aIsReal && !bIsReal) return -1;
+      if (!aIsReal && bIsReal) return 1;
+      return 0;
     });
 
     const totalPages = Math.ceil(total / limit);
 
     return NextResponse.json(
       {
-        data: cars,
+        data: sortedCars,
         total,
         page,
         totalPages,
