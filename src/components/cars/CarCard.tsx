@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Car } from "@/store/carSlice";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface CarCardProps {
   car: Car;
@@ -10,6 +11,29 @@ interface CarCardProps {
 
 export default function CarCard({ car }: CarCardProps) {
   const primaryImage = car.images.find((img) => img.isPrimary) || car.images[0];
+
+  const [modelType, setModelType] = useState<string>("");
+
+  useEffect(() => {
+    modelIdentifier(car);
+  }, [car]);
+
+  const modelIdentifier = (car: Car) => {
+    if (car.description.includes("sedan")) {
+      setModelType("Sedan");
+    } else if (car.description.includes("suv")) {
+      setModelType("SUV");
+    } else if (car.description.includes("truck")) {
+      setModelType("Utility Truck");
+    } else if (car.description.includes("grand-tourer")) {
+      setModelType("GT");
+    } else if (car.description.includes("hybrid")) {
+      setModelType("hybrid");
+    } else {
+      setModelType("SUV");
+    }
+    return modelType;
+  };
 
   return (
     <Link href={`/cars/${car.slug}`}>
@@ -30,7 +54,7 @@ export default function CarCard({ car }: CarCardProps) {
         {/* Car Info */}
         <div className="space-y-3">
           {/* Meta Info */}
-          <div className="flex items-center gap-3 text-xs text-midlife-light-gray font-satoshi">
+          {/* <div className="flex items-center gap-3 text-xs text-midlife-light-gray font-satoshi">
             <div className="flex items-center gap-1">
               <svg
                 className="w-4 h-4"
@@ -49,12 +73,24 @@ export default function CarCard({ car }: CarCardProps) {
             </div>
             <span>/</span>
             <span>Electric Vehicle</span>
+          </div> */}
+
+          {/* Car Name with Badge */}
+          <div className="flex items-center justify-between">
+            <h3 className="text-2xl font-bold text-midlife-text font-termina group-hover:text-midlife-red transition-colors">
+              {car.name}
+            </h3>
+            {modelType && (
+              <span className="px-2 py-1 bg-[#0EA5E9]/20 text-[#0EA5E9] text-xs font-semibold rounded-full font-satoshi">
+                {modelType}
+              </span>
+            )}
           </div>
 
-          {/* Car Name */}
-          <h3 className="text-2xl font-bold text-midlife-text font-termina group-hover:text-midlife-red transition-colors">
-            {car.name}
-          </h3>
+          {/* Car Description */}
+          <p className="text-sm text-midlife-light-gray font-satoshi line-clamp-2">
+            {car.description}
+          </p>
         </div>
       </div>
     </Link>
