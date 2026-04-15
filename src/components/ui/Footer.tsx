@@ -33,10 +33,6 @@ export default function Footer() {
                   Tesla
                 </div>
               </div>
-              <p className="text-sm text-gray-400 font-satoshi mb-6 leading-relaxed">
-                Your favourite business management software. Built for early
-                startup founders.
-              </p>
               <div className="flex items-center gap-3">
                 <a
                   href="https://x.com/tesla"
