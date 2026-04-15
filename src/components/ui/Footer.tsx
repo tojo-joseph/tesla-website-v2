@@ -6,11 +6,11 @@ import { motion } from "motion/react";
 export default function Footer() {
   const navigationLinks = [
     { label: "Home", href: "/" },
-    { label: "About", href: "#about" },
+    // { label: "About", href: "#about" },
     { label: "Cars", href: "/cars" },
     { label: "Energy", href: "/energy" },
     { label: "Charging", href: "/charging" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact-us" },
   ];
 
   return (

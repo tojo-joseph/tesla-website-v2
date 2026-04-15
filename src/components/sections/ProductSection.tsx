@@ -31,7 +31,7 @@ export default function ProductSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16">
-          <motion.div
+          {/* <motion.div
             className="text-midlife-red text-sm tracking-wider mb-4 font-satoshi"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export default function ProductSection() {
             transition={{ duration: 0.6 }}
           >
             [ Engineering ]
-          </motion.div>
+          </motion.div> */}
           <motion.h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-midlife-text font-termina uppercase leading-tight"
             initial={{ opacity: 0, y: 20 }}
