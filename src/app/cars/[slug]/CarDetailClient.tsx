@@ -18,21 +18,8 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
     (state) => state.config,
   );
 
-  // Extract colors from car images (assuming each color has an image)
-  const colors = car.images.map((img: any, index: number) => ({
-    id: img.id,
-    name: img.alt || `Color ${index + 1}`,
-    hexCode: img.alt?.includes("Red")
-      ? "#E31937"
-      : img.alt?.includes("Blue")
-        ? "#0066CC"
-        : img.alt?.includes("White")
-          ? "#FFFFFF"
-          : img.alt?.includes("Black")
-            ? "#000000"
-            : "#808080",
-    imageUrl: img.url,
-  }));
+  // Use colors from the Color table
+  const colors = car.colors || [];
 
   // Set default color and variant on mount
   useEffect(() => {
@@ -86,17 +73,19 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
             />
           </motion.div>
 
-          {/* Color Selector */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <ColorSelector
-              colors={colors}
-              selectedColorId={selectedColorId || undefined}
-            />
-          </motion.div>
+          {/* Color Selector - Only show if multiple colors available */}
+          {colors.length > 1 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <ColorSelector
+                colors={colors}
+                selectedColorId={selectedColorId || undefined}
+              />
+            </motion.div>
+          )}
         </div>
 
         {/* RIGHT COLUMN */}
