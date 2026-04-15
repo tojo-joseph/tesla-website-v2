@@ -67,9 +67,9 @@ export default function ProductSection() {
             >
               <div className="flex items-start gap-4">
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-midlife-red/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#0EA5E9]/10 flex items-center justify-center">
                     <svg
-                      className="w-6 h-6 text-midlife-red"
+                      className="w-6 h-6 text-[#0EA5E9]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -106,9 +106,9 @@ export default function ProductSection() {
             >
               <div className="flex items-start gap-4">
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-midlife-red/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#0EA5E9]/10 flex items-center justify-center">
                     <svg
-                      className="w-6 h-6 text-midlife-red"
+                      className="w-6 h-6 text-[#0EA5E9]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -154,7 +154,7 @@ export default function ProductSection() {
               />
             </div>
             {/* Decorative Element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-midlife-red/10 rounded-full blur-3xl -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#0EA5E9]/10 rounded-full blur-3xl -z-10"></div>
           </motion.div>
         </div>
 

@@ -78,11 +78,10 @@ export default function ContactUsPage() {
               Contact
             </motion.h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Left Column */}
+            <div>
               <div className="space-y-12">
                 {/* Sales */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
@@ -99,10 +98,10 @@ export default function ContactUsPage() {
                     </a>
                     .
                   </p>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Vehicle Customer Support */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -119,37 +118,123 @@ export default function ContactUsPage() {
                     </a>{" "}
                     about your order, delivery, ownership and product support.
                   </p>
-                </motion.div>
+                </motion.div> */}
 
-                {/* Energy and Charging Product Customer Support */}
+                {/* Contact Form */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <h3 className="text-xl font-bold text-white mb-4 font-termina">
-                    Energy and Charging Product Customer Support
+                  <h3 className="text-2xl font-bold text-white mb-6 font-termina uppercase">
+                    Send Us a Message
                   </h3>
-                  <p className="text-gray-300 font-satoshi mb-2">
-                    For support with Powerwall, Solar Panels, Solar Roof and
-                    other energy products, call our Customer Support team toll
-                    free at{" "}
-                    <a
-                      href="tel:8777983752"
-                      className="underline hover:text-midlife-red transition-colors"
+                  <form
+                    action={`mailto:tojoj130@gmail.com`}
+                    method="post"
+                    encType="text/plain"
+                    className="space-y-6"
+                  >
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block text-white font-satoshi mb-2"
+                        >
+                          Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
+                          placeholder="Your name"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block text-white font-satoshi mb-2"
+                        >
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="phone"
+                          className="block text-white font-satoshi mb-2"
+                        >
+                          Phone
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
+                          placeholder="(123) 456-7890"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="subject"
+                          className="block text-white font-satoshi mb-2"
+                        >
+                          Subject *
+                        </label>
+                        <select
+                          id="subject"
+                          name="subject"
+                          required
+                          className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors"
+                        >
+                          <option value="">Select a subject</option>
+                          <option value="Test Drive">
+                            Schedule Test Drive
+                          </option>
+                          <option value="Order Inquiry">Order Inquiry</option>
+                          <option value="Support">Customer Support</option>
+                          <option value="General">General Inquiry</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="message"
+                        className="block text-white font-satoshi mb-2"
+                      >
+                        Message *
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        required
+                        rows={6}
+                        className="w-full px-4 py-3 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-lg text-white font-satoshi focus:outline-none focus:border-midlife-red transition-colors resize-none"
+                        placeholder="Tell us how we can help you..."
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full md:w-auto px-8 py-4 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-xl transition-all duration-300 font-satoshi uppercase tracking-wide"
                     >
-                      (877) 798-3752
-                    </a>{" "}
-                    and select option 4, then option 2.
-                  </p>
-                  <p className="text-gray-300 font-satoshi">
-                    For help with Wall Connector and other home charging
-                    products, select option 3.
-                  </p>
+                      Send Message
+                    </button>
+                  </form>
                 </motion.div>
 
                 {/* Roadside Assistance */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
@@ -167,10 +252,10 @@ export default function ContactUsPage() {
                     </a>{" "}
                     for emergency roadside assistance.
                   </p>
-                </motion.div>
+                </motion.div> */}
 
                 {/* Service */}
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
@@ -188,59 +273,7 @@ export default function ContactUsPage() {
                     </a>{" "}
                     in the Tesla app.
                   </p>
-                </motion.div>
-              </div>
-
-              {/* Right Column */}
-              <div className="space-y-12">
-                {/* Press */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <h3 className="text-xl font-bold text-white mb-4 font-termina">
-                    Press
-                  </h3>
-                  <div className="space-y-3 text-gray-300 font-satoshi">
-                    <div>
-                      <p className="font-semibold">Americas</p>
-                      <a
-                        href="mailto:press@tesla.com"
-                        className="underline hover:text-midlife-red transition-colors"
-                      >
-                        press@tesla.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="font-semibold">Europe & Middle East</p>
-                      <a
-                        href="mailto:eupress@tesla.com"
-                        className="underline hover:text-midlife-red transition-colors"
-                      >
-                        eupress@tesla.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="font-semibold">Australia & Asia</p>
-                      <a
-                        href="mailto:apacpress@tesla.com"
-                        className="underline hover:text-midlife-red transition-colors"
-                      >
-                        apacpress@tesla.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="font-semibold">China</p>
-                      <a
-                        href="mailto:china-press@tesla.com"
-                        className="underline hover:text-midlife-red transition-colors"
-                      >
-                        china-press@tesla.com
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
+                </motion.div> */}
               </div>
             </div>
           </div>
@@ -290,10 +323,12 @@ export default function ContactUsPage() {
                     {office.city}
                   </p>
                   <a
-                    href="#"
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${office.address}, ${office.city}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-black underline hover:text-midlife-red transition-colors font-satoshi"
                   >
-                    Directions
+                    Locate on a map
                   </a>
                 </motion.div>
               ))}

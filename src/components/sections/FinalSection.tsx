@@ -131,9 +131,9 @@ export default function FinalSection() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 bg-midlife-red text-white rounded-lg font-bold text-lg hover:bg-midlife-red/90 transition-colors font-satoshi"
+                className="w-full py-4 bg-[#0EA5E9] text-white rounded-full font-bold text-lg hover:bg-[#0EA5E9]/90 transition-colors font-satoshi"
               >
-                Submit
+                Contact Us
               </button>
             </form>
           </motion.div>

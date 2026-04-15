@@ -26,7 +26,7 @@ export default function Footer() {
               transition={{ duration: 0.6 }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-midlife-red rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-[#0EA5E9] rounded-lg flex items-center justify-center">
                   <svg
                     className="w-8 h-8 text-white"
                     fill="currentColor"
@@ -118,7 +118,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-2 text-sm text-midlife-light-gray font-satoshi">
             <span>Created by</span>
-            <div className="w-6 h-6 rounded-full bg-midlife-red flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-6 h-6 rounded-full bg-[#0EA5E9] flex items-center justify-center text-white text-xs font-bold">
               T
             </div>
             <span className="text-midlife-text">Tesla Design Team</span>

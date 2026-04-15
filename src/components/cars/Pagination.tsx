@@ -9,7 +9,11 @@ interface PaginationProps {
   onPageChange?: (page: number) => void;
 }
 
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   const dispatch = useAppDispatch();
 
   const handlePageChange = (page: number) => {
@@ -22,7 +26,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   const getVisiblePages = () => {
     const pages: number[] = [];
     const maxVisible = 5;
-    
+
     if (totalPages <= maxVisible) {
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
@@ -30,12 +34,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
     } else {
       const start = Math.max(1, currentPage - 2);
       const end = Math.min(totalPages, start + maxVisible - 1);
-      
+
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
     }
-    
+
     return pages;
   };
 
@@ -76,7 +80,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             onClick={() => handlePageChange(page)}
             className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 font-termina ${
               currentPage === page
-                ? "bg-midlife-red text-white"
+                ? "bg-[#0EA5E9] text-white"
                 : "text-midlife-light-gray hover:text-white hover:bg-midlife-dark-gray"
             }`}
           >

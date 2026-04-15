@@ -64,15 +64,27 @@ export default function Navbar() {
             <div className="flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link href={link.href} key={link.label}>
-                  <button
-                    className={`cursor-pointer px-3 py-2 text-sm font-medium transition-colors font-satoshi whitespace-nowrap ${
-                      isScrolled
-                        ? "text-gray-700 hover:text-black"
-                        : "text-midlife-light-gray hover:text-midlife-text"
-                    }`}
-                  >
-                    {link.label}
-                  </button>
+                  {link.label === "Contact Us" ? (
+                    <button
+                      className={`cursor-pointer px-6 py-2 text-sm font-bold transition-colors font-satoshi whitespace-nowrap rounded-full ${
+                        isScrolled
+                          ? "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90"
+                          : "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/90"
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <button
+                      className={`cursor-pointer px-3 py-2 text-sm font-medium transition-colors font-satoshi whitespace-nowrap ${
+                        isScrolled
+                          ? "text-gray-700 hover:text-black"
+                          : "text-midlife-light-gray hover:text-midlife-text"
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  )}
                 </Link>
               ))}
             </div>

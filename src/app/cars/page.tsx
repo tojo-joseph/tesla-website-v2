@@ -106,7 +106,7 @@ export default function CarsPage() {
                     onClick={() => {
                       dispatch({ type: "filters/resetFilters" });
                     }}
-                    className="bg-midlife-red hover:bg-red-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina"
+                    className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina"
                   >
                     Reset Filters
                   </button>

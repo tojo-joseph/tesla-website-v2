@@ -77,21 +77,23 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Link href="/cars">
-                <button className="bg-midlife-red hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina flex items-center gap-2">
-                  Explore Our Fleet
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9]">
+                  <span className="relative z-10">Explore Our Fleet</span>
+                  <span className="relative z-10 bg-[#0EA5E9] group-hover:bg-white/20 p-2 rounded transition-all duration-300">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                  </span>
                 </button>
               </Link>
             </motion.div>
@@ -121,7 +123,7 @@ export default function HeroSection() {
 
             {/* Floating Badge */}
             <motion.div
-              className="absolute bottom-4 right-4 bg-midlife-red text-white px-4 py-3 rounded-full shadow-2xl"
+              className="absolute bottom-4 right-4 bg-[#0EA5E9] text-white px-4 py-3 rounded-full shadow-2xl"
               initial={{ opacity: 0, rotate: -45, scale: 0 }}
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
@@ -195,21 +197,23 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <Link href="/cars">
-                  <button className="bg-midlife-red hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 font-termina flex items-center gap-2">
-                    Explore Our Fleet
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
+                  <button className="group relative bg-transparent border-2 border-[#0EA5E9] text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 font-termina flex items-center gap-3 overflow-hidden hover:bg-[#0EA5E9]">
+                    <span className="relative z-10">Explore Our Fleet</span>
+                    <span className="relative z-10 bg-[#0EA5E9] group-hover:bg-white/20 p-2 rounded transition-all duration-300">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </span>
                   </button>
                 </Link>
               </motion.div>
@@ -250,7 +254,7 @@ export default function HeroSection() {
 
               {/* Floating Badge */}
               <motion.div
-                className="absolute bottom-8 right-8 bg-midlife-red text-white px-6 py-4 rounded-full shadow-2xl"
+                className="absolute bottom-8 right-8 bg-[#0EA5E9] text-white px-6 py-4 rounded-full shadow-2xl"
                 style={{ opacity: badgeOpacity }}
                 initial={{ opacity: 0, rotate: -45, scale: 0 }}
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}

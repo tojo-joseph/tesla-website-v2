@@ -197,7 +197,7 @@ export default function CarDetailClient({ car }: CarDetailClientProps) {
           >
             <Link
               href={`/configure/${car.slug}`}
-              className="block w-full bg-midlife-red hover:bg-red-600 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 text-center font-satoshi uppercase tracking-wide"
+              className="block w-full bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white py-4 px-6 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 text-center font-satoshi uppercase tracking-wide"
             >
               Build and Price
             </Link>
