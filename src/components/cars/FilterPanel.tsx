@@ -110,26 +110,26 @@ export default function FilterPanel() {
 
       {/* Mobile Filter Panel */}
       {isMobileOpen && (
-        <div className="md:hidden fixed inset-0 z-50 flex">
-          {/* Backdrop */}
+        <div className="md:hidden fixed inset-0 z-50">
+          {/* Blurred Backdrop */}
           <div
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/60 backdrop-blur-md"
             onClick={() => setIsMobileOpen(false)}
           />
 
-          {/* Panel */}
-          <div className="relative bg-midlife-bg w-80 h-full shadow-xl overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-midlife-text font-termina">
+          {/* Full Page Panel */}
+          <div className="relative w-full h-full bg-midlife-bg overflow-y-auto">
+            <div className="p-6 sm:p-8 max-w-2xl mx-auto">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-midlife-text font-termina uppercase">
                   Filters
                 </h2>
                 <button
                   onClick={() => setIsMobileOpen(false)}
-                  className="text-midlife-light-gray hover:text-midlife-text transition-colors"
+                  className="text-midlife-light-gray hover:text-midlife-text transition-colors p-2"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-7 h-7"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
