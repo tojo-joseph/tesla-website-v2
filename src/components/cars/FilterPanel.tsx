@@ -51,12 +51,22 @@ export default function FilterPanel() {
   // Handle price changes
   const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-    dispatch(setMinPrice(value));
+    // Ensure min price doesn't exceed max price
+    if (filters.maxPrice > 0 && value > filters.maxPrice) {
+      dispatch(setMinPrice(filters.maxPrice));
+    } else {
+      dispatch(setMinPrice(value));
+    }
   };
 
   const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 0;
-    dispatch(setMaxPrice(value));
+    // Ensure max price doesn't go below min price
+    if (value < filters.minPrice) {
+      dispatch(setMaxPrice(filters.minPrice));
+    } else {
+      dispatch(setMaxPrice(value));
+    }
   };
 
   // Handle reset filters
