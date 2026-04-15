@@ -51,12 +51,19 @@ export default function Navbar() {
           {/* Tesla Logo */}
           <div className="flex items-center shrink-0">
             <Link href="/">
-              <div
-                className={`font-bold text-2xl tracking-widest font-termina transition-colors ${
-                  isScrolled ? "text-black" : "text-midlife-text"
-                }`}
-              >
-                TESLA
+              <div className="flex items-center">
+                <img
+                  src="/images/logo.svg"
+                  alt="Tesla Logo"
+                  className="w-12 h-12 object-contain"
+                />
+                <div
+                  className={`font-bold text-2xl tracking-widest font-termina transition-colors ${
+                    isScrolled ? "text-black" : "text-midlife-text"
+                  }`}
+                >
+                  TESLA
+                </div>
               </div>
             </Link>
           </div>
@@ -138,8 +145,13 @@ export default function Navbar() {
           {/* Header with Logo and Close Button */}
           <div className="flex items-center justify-between px-4 h-16 border-b border-midlife-dark-gray shrink-0">
             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-              <div className="text-midlife-text font-bold text-2xl tracking-widest font-termina">
-                TESLA
+              <div className="flex items-center gap-2 text-midlife-text font-bold text-2xl tracking-widest font-termina">
+                <img
+                  src="/images/logo.svg"
+                  alt="Tesla Logo"
+                  className="w-8 h-8 object-contain"
+                />
+                <span>TESLA</span>
               </div>
             </Link>
             <button
