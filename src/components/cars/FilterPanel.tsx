@@ -153,6 +153,7 @@ export default function FilterPanel() {
                 onMinPriceChange={handleMinPriceChange}
                 onMaxPriceChange={handleMaxPriceChange}
                 onResetFilters={handleResetFilters}
+                onGoClick={() => setIsMobileOpen(false)}
               />
             </div>
           </div>
@@ -174,6 +175,7 @@ export default function FilterPanel() {
             onMinPriceChange={handleMinPriceChange}
             onMaxPriceChange={handleMaxPriceChange}
             onResetFilters={handleResetFilters}
+            onGoClick={() => {}}
           />
         </div>
       </div>
@@ -190,6 +192,7 @@ function FilterContent({
   onMinPriceChange,
   onMaxPriceChange,
   onResetFilters,
+  onGoClick,
 }: {
   localSearch: string;
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -198,6 +201,7 @@ function FilterContent({
   onMinPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onMaxPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onResetFilters: () => void;
+  onGoClick: () => void;
 }) {
   return (
     <div className="space-y-8">
@@ -227,8 +231,16 @@ function FilterContent({
             value={localSearch}
             onChange={onSearchChange}
             placeholder="Search vehicles..."
-            className="w-full pl-12 pr-4 py-3.5 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-xl text-midlife-text placeholder-midlife-light-gray/50 focus:outline-none focus:ring-2 focus:ring-midlife-red focus:border-transparent transition-all duration-200 font-satoshi"
+            className="w-full pl-12 pr-14 py-3.5 bg-midlife-dark-gray/50 border border-midlife-dark-gray rounded-xl text-midlife-text placeholder-midlife-light-gray/50 focus:outline-none focus:ring-2 focus:ring-midlife-red focus:border-transparent transition-all duration-200 font-satoshi"
           />
+          <button
+            onClick={onGoClick}
+            className="absolute inset-y-0 right-0 pr-2 flex items-center"
+          >
+            <span className="bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white px-3 py-1.5 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer font-satoshi">
+              Go
+            </span>
+          </button>
         </div>
       </div>
 
