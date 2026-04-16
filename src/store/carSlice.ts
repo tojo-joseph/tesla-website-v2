@@ -66,7 +66,7 @@ const initialState: CarState = {
   cars: [],
   total: 0,
   totalPages: 0,
-  loading: false,
+  loading: true,
   error: null,
 };
 
