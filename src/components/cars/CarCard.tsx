@@ -105,10 +105,52 @@ export default function CarCard({ car }: CarCardProps) {
             )}
           </div>
 
-          {/* Car Description */}
-          <p className="text-sm text-midlife-light-gray font-satoshi line-clamp-2">
-            {car.description}
-          </p>
+          {/* Car Specs */}
+          <div className="space-y-2">
+            <div className="text-sm text-midlife-light-gray font-satoshi">
+              <span className="font-semibold text-midlife-text">
+                Est ${Math.round(car.basePrice / 63.9)}
+              </span>
+              <span className="text-midlife-light-gray"> /mo financing • </span>
+              <span className="font-semibold text-midlife-text">
+                ${car.basePrice.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-xs text-midlife-light-gray font-satoshi">
+              <div className="flex items-center gap-1">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+                <span>{car.topSpeed} mph Top Speed</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{car.zeroToSixty}s 0-60 mph</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Link>
