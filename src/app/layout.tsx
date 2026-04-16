@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/social_sharing_img.png",
+        url: "https://tesla-website-v2-git-develop-tojo-josephs-projects.vercel.app/images/social_sharing_img.png",
         width: 1200,
         height: 630,
         alt: "Tesla - Electric Vehicles",
@@ -58,7 +58,9 @@ export const metadata: Metadata = {
     description:
       "Tesla is accelerating the world's transition to sustainable energy with electric cars, solar and integrated renewable energy solutions.",
     creator: "@tesla",
-    images: ["/images/social_sharing_img.png"],
+    images: [
+      "https://tesla-website-v2-git-develop-tojo-josephs-projects.vercel.app/images/social_sharing_img.png",
+    ],
   },
   robots: {
     index: true,
